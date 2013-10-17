@@ -29,11 +29,3 @@ describe UsersController do
     end
   end
 end
-
-
-
-  describe "POST signup" do
-    let(:new_user) { FactoryGirl.build(:user) }
-    it "creates a new user with valid info" do
-    end
-  end
