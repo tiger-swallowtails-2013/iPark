@@ -1,4 +1,12 @@
 IPark::Application.routes.draw do
+  resources :users  path_names: { new: 'signup'}
+  resources :spots
+
+  get sessions/login
+  post sessions/login
+  post sessions/logout
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +47,7 @@ IPark::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
