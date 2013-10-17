@@ -1,8 +1,9 @@
 IPark::Application.routes.draw do
-  resources :users, only: [:new, :create]  path_names: { new: 'signup'}
   resources :spots, only: [:new, :create, :show, :index, :destroy]
 
-  # get sessions/login
-  # post sessions/login
-  # post sessions/logout
+  get "signup" => "users#new", :as => :new_user
+  post "signup" => "users#create", :as => :signup_user
+  get "login" => "sessions#new", :as => :new_session
+  post "login" => "sessions#create", :as => :login_session
+  post "logout" => "sessions#destroy", :as => :logout_session
 end
