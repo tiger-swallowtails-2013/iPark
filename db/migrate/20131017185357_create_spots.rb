@@ -6,7 +6,7 @@ class CreateSpots < ActiveRecord::Migration
       t.integer :price
       t.string :image
       t.text :description
-      t.string :type
+      t.string :location_type
       t.timestamps
     end
   end
