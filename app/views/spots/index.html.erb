@@ -1,6 +1,6 @@
 Available Spots
 
-<%= form_for(@spot) do |f| %>
+<%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
   <%= f.label :spot_number %>
   <%= f.text_field :id %>
   <%= f.submit %> 
