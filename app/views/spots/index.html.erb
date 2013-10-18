@@ -1,5 +1,5 @@
  <%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
-
+ <%= link_to "List a Spot", :controller => :spots, :action => :new %>
 <p>Available Spots</p>
 
 <%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
