@@ -3,9 +3,9 @@ class CreateReservationTable < ActiveRecord::Migration
     create_table :reservations do |t|
       t.belongs_to :user
       t.belongs_to :spot
-      t.string :days
-      t.date :start_date
-      t.date :end_date
+      t.string :day
+      t.string :year
+      t.string :month
       t.timestamps
     end
   end
