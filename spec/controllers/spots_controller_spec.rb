@@ -10,22 +10,29 @@ describe SpotsController do
   describe "POST signup" do
     let(:new_spot) { FactoryGirl.build(:spot) }
     it "creates new spot when given valid params" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, type: new_spot.type}).to change(Spot, :count).by(1)
+      create_spot = post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}
+      expect(Spot.count).to be(1)
     end
     it "renders correct page for new spot" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, type: new_spot.type}).to render_template :index
+      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}).to render_template :index
     end
     it "does not create a new spot with invalid params" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, type: new_spot.type}).not_to change(Spot, :count)
+      new_post = post :create, :spot => {street: new_spot.street, zip_code: nil, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}
+      expect(Spot.count).to be(0)
     end
     it "renders correct page for invalid spot" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, type: new_spot.type}).to render_template :index
+      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}).to render_template :index
+    end
+    after(:each) do
+      Spot.destroy_all
     end
   end
 
   describe "GET show" do
-    let(:get_spot) {FactoryGirl.create(:spot)}
+    let!(:new_user) { FactoryGirl.create(:user) }
+    let(:get_spot) { FactoryGirl.create(:spot) }
     it "shows the spot page" do
+      p get_spot
       expect(get :show, id: get_spot.id).to render_template :show
     end
   end
@@ -45,5 +52,9 @@ describe SpotsController do
     it "renders correct page" do
       expect(post :destroy, id: destroy_spot2.id).to render_template :index
     end
+  end
+
+  after(:each) do
+    Spot.destroy_all
   end
 end
