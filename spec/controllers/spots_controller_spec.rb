@@ -46,20 +46,6 @@ describe SpotsController do
     end
   end
 
-  describe "POST destroy" do
-    before(:each) do
-      @destroy_spot = FactoryGirl.create(:spot)
-      @destroy_spot2 = FactoryGirl.create(:spot)
-    end
-    it "destroys spot" do
-      delete :destroy, id: @destroy_spot.id
-      expect(Spot.count).to be(1)
-    end
-    it "renders correct page" do
-      expect(get :destroy, id: @destroy_spot2.id).to render_template :index
-    end
-  end
-
   after(:each) do
     Spot.destroy_all
   end
