@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20131017230745) do
   create_table "users", force: true do |t|
     t.integer  "spot_id"
     t.string   "password_digest"
+    t.string   "password_confirmation"
     t.string   "email"
     t.string   "username"
     t.datetime "created_at"
