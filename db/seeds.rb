@@ -52,9 +52,50 @@ def fake_spot_description
       location_type: my_spot,
       description: my_description,
       street: my_street,
-      zipcode: 94102 + rand(88)
+      zip_code: 94102 + rand(88)
     }
 end
+
+puts "----SEEDING DATABASE-----"
+puts "\n----Creating Users-----"
+
+100.times do |create_fake_users|
+  print "."
+  begin
+    User.create!(
+         email: Faker::Internet.user_name,
+      username: Faker::Internet.email,
+      password: "foobar",
+      password_confirmation: "foobar"
+    )
+  rescue
+    puts "\none randomly generated user failed validation, skipping ahead..."
+  end
+
+end
+
+puts "\n----Creating & Assigning Spots-----"
+
+valid_user_ids = User.pluck(:id)
+
+80.times do |create_and_assign_spots|
+  print "."
+  begin
+    my_description = fake_spot_description
+    new_spot = Spot.create!(
+                  user_id: valid_user_ids.sample,
+                  street: my_description[:street],
+                  zip_code: my_description[:zip_code],
+                  price: rand(1..30),
+                  description: my_description[:description],
+                  location_type: my_description[:location_type]
+                )
+  rescue
+    puts "\none randomly generated parking spot failed validation, skipping ahead..."
+  end
+end
+
+puts "\n----Creating Test Accounts-----"
 
 1.times do |make_test_users|
   User.create!(
@@ -77,25 +118,5 @@ end
   )
 end
 
-500.times do |create_fake_users|
-  User.create!(
-       email: Faker::Internet.user_name,
-    username: Faker::Internet.email,
-    password: "foobar",
-    password_confirmation: "foobar"
-  )
-end
 
-300.times do |create_and_assign_spots|
-    my_description = fake_spot_description
-    new_spot =  Spot.create!(
-                  street: my_description[:street],
-                  zipcode: my_description[:zipcode],
-                  price: rand(1..30),
-                  description: my_description[:description],
-                  location_type: my_description[:type]
-                )
-    User.find(rand(1..100)).spots << new_spot
-end
-
-
+puts "\n----Finished-----"
