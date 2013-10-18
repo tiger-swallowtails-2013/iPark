@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20131018214736) do
   create_table "reservations", force: true do |t|
     t.integer  "user_id"
     t.integer  "spot_id"
-    t.string   "days"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string   "day"
+    t.string   "year"
+    t.string   "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
