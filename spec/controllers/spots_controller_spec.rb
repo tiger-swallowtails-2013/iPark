@@ -39,7 +39,8 @@ describe SpotsController do
   end
 
   describe "GET index" do
-    it "shows index page" do
+    it "shows index page when logged in" do
+      session[:id] = 1
       expect(get :index).to render_template :index
     end
   end
@@ -50,11 +51,11 @@ describe SpotsController do
       @destroy_spot2 = FactoryGirl.create(:spot)
     end
     it "destroys spot" do
-      @destroy_post = post :destroy, id: @destroy_spot.id
+      delete :destroy, id: @destroy_spot.id
       expect(Spot.count).to be(1)
     end
     it "renders correct page" do
-      expect(post :destroy, id: @destroy_spot2.id).to render_template :index
+      expect(get :destroy, id: @destroy_spot2.id).to render_template :index
     end
   end
 

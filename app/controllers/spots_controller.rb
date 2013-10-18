@@ -18,11 +18,18 @@ class SpotsController < ApplicationController
   end
 
   def index
+    @spot = Spot.new
+    @spots = Spot.all
+    if signed_in?
+      render :index
+    else
+      redirect_to new_session_path
+    end
   end
 
   def destroy
-    spot = Spot.find(params[:id])
+    spot = Spot.find(params[:spot][:id])
     spot.destroy
-    render :index
+    redirect_to spots_path
   end
 end
