@@ -8,20 +8,22 @@ describe SpotsController do
   end
 
   describe "POST signup" do
-    let(:new_spot) { FactoryGirl.build(:spot) }
+    before(:each) do
+      @new_spot = FactoryGirl.build(:spot)
+    end
     it "creates new spot when given valid params" do
-      create_spot = post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}
+      create_spot = post :create, :spot => {street: @new_spot.street, zip_code: @new_spot.zip_code, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}
       expect(Spot.count).to be(1)
     end
     it "renders correct page for new spot" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}).to render_template :index
+      expect(post :create, :spot => {street: @new_spot.street, zip_code: @new_spot.zip_code, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}).to render_template :index
     end
     it "does not create a new spot with invalid params" do
-      new_post = post :create, :spot => {street: new_spot.street, zip_code: nil, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}
+      @new_spot = post :create, :spot => {street: @new_spot.street, zip_code: nil, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}
       expect(Spot.count).to be(0)
     end
     it "renders correct page for invalid spot" do
-      expect(post :create, :spot => {street: new_spot.street, zip_code: new_spot.zip_code, price: new_spot.price, description: new_spot.description, location_type: new_spot.location_type}).to render_template :index
+      expect(post :create, :spot => {street: @new_spot.street, zip_code: @new_spot.zip_code, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}).to render_template :index
     end
     after(:each) do
       Spot.destroy_all

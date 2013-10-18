@@ -9,7 +9,7 @@ class SpotsController < ApplicationController
     if @spot.save
       render :index
     else
-      redirect_to :new
+      render :new
     end
   end
 
