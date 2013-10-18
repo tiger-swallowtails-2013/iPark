@@ -5,7 +5,7 @@ IPark::Application.routes.draw do
   post "signup" => "users#create", :as => :signup_user
   get "login" => "sessions#new", :as => :new_session
   post "login" => "sessions#create", :as => :login_session
-  get "logout" => "sessions#destroy", :as => :logout_session
+  post "logout" => "sessions#destroy", :as => :logout_session
 
   root :to => 'spots#index'
 end
