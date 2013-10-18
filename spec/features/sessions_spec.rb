@@ -7,3 +7,12 @@ feature "user can log in" do
     expect(page) == spots_path
   end
 end
+
+feature "user can log out" do
+  let!(:current_user) {FactoryGirl.create(:user)}
+  scenario "when user clicks logout the page should contain 'login'" do
+    login(current_user)
+    logout
+    expect(page).to have_link_or_button('Login')
+  end
+end
