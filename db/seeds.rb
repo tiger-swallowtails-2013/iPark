@@ -1,25 +1,25 @@
 STREET_NAMES = [
-  "Alemany Boulevard", "Alvarado Street", "Ambrose Bierce Alley", "Anza Street", "Arguello Boulevard", "Ashbury Street",
-  "Baker Street", "Balboa Street", "Bartlett Street", "Beale Street", "Bernal Avenue", "Bluxome Street", "Brannan Street",
+  "Alemany Boulevard", "Alvarado St", "Ambrose Bierce Alley", "Anza St", "Arguello Boulevard", "Ashbury St",
+  "Baker St", "Balboa St", "Bartlett St", "Beale St", "Bernal Avenue", "Bluxome St", "Brannan St",
   "Brenham Place", "Broderick Street", "Bryant Street", "Buchanan Street", "Burnett Avenue", "Bush Street", "Cabrillo Street",
   "California Street", "Castro Street", "Cesar Chavez Street", "Clark Street", "Cole Street", "Coleman Street",
   "Colin P Kelly Junior Street", "Davidson Street", "Davis Street", "De Haro Street", "Dirk Dirksen Place", "Divisadero Street",
   "Dolores Street", "Duncan Street", "Elizabeth Street", "Fillmore Street", "Folsom Street", "Franklin Street", "Fremont Street",
   "Fulton Street", "Funston Street", "Geary Boulevard", "Gough Street", "Grant Street", "Guerrero Street", "Haight Street",
   "Harrison Street", "Hayes Street", "Howard Street", "Hyde Street", "Ingalls Street", "Irving Street", "Jack Kerouac Alley",
-  "Jack Micheline Alley", "Jackson Street", "Jefferson Street", "Jerrold Avenue", "Jersey Street", "John F. Shelley Drive",
+  "Jack Micheline Alley", "Jackson Street", "Jefferson Street", "Jerrold Avenue", "Jersey Street", "John F. Shelley Dr.",
   "John Muir Drive", "Jones Street", "Joost Avenue", "Jose Sarria Court", "Juan Bautista Circle", "Judah Street",
   "Junipero Serra Boulevard", "Justin Herman Plaza", "Kearny Street", "Keyes Avenue", "Kezar Drive", "Kirkham Street",
-  "Laguna Street", "Lane Street", "Lapham Way", "Lapu Lapu Street", "Larkin Street", "Laussat Street", "Lawton Street",
-  "Leavenworth Street", "Le Conte Avenue", "Lech Walesa Street", "Leese Street", "Leidesdorff Street", "Lendrum Street",
+  "Laguna Street", "Lane St.", "Lapham Way", "Lapu Lapu St.", "Larkin St.", "Laussat St.", "Lawton St.",
+  "Leavenworth St.", "Le Conte Avenue", "Lech Walesa St.", "Leese Street", "Leidesdorff Street", "Lendrum Street",
   "Liggett Avenue", "Linares Avenue", "Lincoln Boulevard", "Lincoln Court", "Lincoln Way", "Lombard Street", "Mason Street",
   "McAllister Street", "Montgomery Street", "Moraga Street", "Noe Street", "Noriega Street", "Octavia Street", "O'Farrell Street",
-  "Ortega Street", "O'Shaughnessy Boulevard", "Otis Street", "Pacheco Street", "Palou Avenue", "Peter Yorke Way", "Phelan Avenue",
-  "Pierce Street", "Polk Street", "Portola Avenue", "Potrero Avenue", "Rivera Street", "Rolph Street", "Sanchez Street",
-  "Sansome Street", "Scott Street", "Selby Street", "Shafter Avenue", "Sheridan Street", "Shotwell Street", "Shrader Street.",
-  "Sloat Boulevard", "Spear Street", "Stanyan Street", "Steiner Street", "Steuart Street", "Stockton Street", "Sutter Street",
+  "Ortega Street", "O'Shaughnessy Blvd", "Otis Street", "Pacheco Street", "Palou Avenue", "Peter Yorke Way", "Phelan Avenue",
+  "Pierce Street", "Polk Street", "Portola Avenue", "Potrero Ave", "Rivera Street", "Rolph Street", "Sanchez Street",
+  "Sansome Street", "Scott St", "Selby St", "Shafter Avenue", "Sheridan St", "Shotwell St", "Shrader St.",
+  "Sloat Boulevard", "Spear St", "Stanyan St", "Steiner St", "Steuart St", "Stockton Street", "Sutter Street",
   "Taraval Street", "Taylor Street", "Terry A Francois Boulevard", "Thomas Avenue", "Tonquin Street", "Townsend Street",
-  "Treat Street", "Turk Street", "Ulloa Street", "Valencia Street", "Vallejo Street", "Van Ness Avenue", "Via Ferlinghetti",
+  "Treat St", "Turk Street", "Ulloa Street", "Valencia Street", "Vallejo Street", "Van Ness Avenue", "Via Ferlinghetti",
   "Vicente Street", "Waller Street", "Washington Street", "Wawona Street", "Webb Street", "Yorba Street", "Zarick Street"
 ]
 
@@ -42,7 +42,7 @@ NONCE = [
 
 ZIP_CODES = []
 
-def fake_spot_description
+def generate_fake_spot_data
   my_spot = SPOT_TYPES.sample
   my_street = STREET_NAMES.sample
   my_hood = NEIGHBORHOODS.sample
@@ -51,8 +51,10 @@ def fake_spot_description
   return {
       location_type: my_spot,
       description: my_description,
-      street: my_street,
-      zip_code: 94102 + rand(88)
+      street: rand(1..3000).to_s + " " + my_street,
+      zip_code: 94102 + rand(88),
+      price: rand(1..30),
+      user_id: VALID_USER_IDS.sample
     }
 end
 
@@ -69,29 +71,21 @@ puts "\n----Creating Users-----"
       password_confirmation: "foobar"
     )
   rescue
-    puts "\none randomly generated user failed validation, skipping ahead..."
+    print "x"
   end
 
 end
 
 puts "\n----Creating & Assigning Spots-----"
 
-valid_user_ids = User.pluck(:id)
+VALID_USER_IDS = User.pluck(:id)
 
 80.times do |create_and_assign_spots|
   print "."
   begin
-    my_description = fake_spot_description
-    new_spot = Spot.create!(
-                  user_id: valid_user_ids.sample,
-                  street: my_description[:street],
-                  zip_code: my_description[:zip_code],
-                  price: rand(1..30),
-                  description: my_description[:description],
-                  location_type: my_description[:location_type]
-                )
+    new_spot = Spot.create!(generate_fake_spot_data)
   rescue
-    puts "\none randomly generated parking spot failed validation, skipping ahead..."
+   print "x"
   end
 end
 
