@@ -9,6 +9,11 @@ describe UsersController do
 
   describe "POST signup" do
     let(:new_user) { FactoryGirl.build(:user) }
+    
+    before(:each) do
+      User.destroy_all
+      @new_spot = FactoryGirl.build(:spot)
+    end
     it "creates new user when given valid params" do
       create_user = post :create, :user => {username: new_user.username, password: new_user.password, email: new_user.email, password_confirmation: new_user.password_confirmation}
       expect(User.count).to be(1)

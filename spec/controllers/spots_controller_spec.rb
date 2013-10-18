@@ -9,6 +9,7 @@ describe SpotsController do
 
   describe "POST signup" do
     before(:each) do
+      Spot.destroy_all
       @new_spot = FactoryGirl.build(:spot)
     end
     it "creates new spot when given valid params" do
@@ -42,20 +43,6 @@ describe SpotsController do
     it "shows index page when logged in" do
       session[:id] = 1
       expect(get :index).to render_template :index
-    end
-  end
-
-  describe "POST destroy" do
-    before(:each) do
-      @destroy_spot = FactoryGirl.create(:spot)
-      @destroy_spot2 = FactoryGirl.create(:spot)
-    end
-    it "destroys spot" do
-      delete :destroy, id: @destroy_spot.id
-      expect(Spot.count).to be(1)
-    end
-    it "renders correct page" do
-      expect(get :destroy, id: @destroy_spot2.id).to render_template :index
     end
   end
 
