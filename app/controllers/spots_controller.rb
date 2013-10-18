@@ -18,6 +18,7 @@ class SpotsController < ApplicationController
   end
 
   def index
+    @spot = Spot.new
     @spots = Spot.all
   end
 

@@ -1,4 +1,15 @@
-<p id="index_title">Available Parking Spots </p>
+Available Spots
+
+<%= form_for(@spot) do |f| %>
+  <%= f.label :spot_number %>
+  <%= f.text_field :id %>
+  <%= f.submit %> 
+<% end %>
+
 <% @spots.each do |spot| %>
-<p>Street: <%= spot.street %> Zipcode: <%= spot.zip_code %>
+  <p>
+    ID: <%= spot.id %>
+    Street: <%= spot.street %>
+    Zip Code: <%= spot.zip_code %>
+  </p>
 <% end %>
