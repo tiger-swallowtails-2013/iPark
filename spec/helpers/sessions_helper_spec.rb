@@ -9,6 +9,6 @@ module SessionHelper
   end
 
   def logout
-    visit logout_session_path
+    visit "/logout" 
   end
 end
