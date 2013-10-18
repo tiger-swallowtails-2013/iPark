@@ -20,6 +20,11 @@ class SpotsController < ApplicationController
   def index
     @spot = Spot.new
     @spots = Spot.all
+    if signed_in?
+      render :index
+    else
+      redirect_to new_session_path
+    end
   end
 
   def destroy
