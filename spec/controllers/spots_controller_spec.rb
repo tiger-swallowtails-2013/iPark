@@ -34,7 +34,6 @@ describe SpotsController do
     let!(:new_user) { FactoryGirl.create(:user) }
     let(:get_spot) { FactoryGirl.create(:spot) }
     it "shows the spot page" do
-      p get_spot
       expect(get :show, id: get_spot.id).to render_template :show
     end
   end
@@ -46,13 +45,16 @@ describe SpotsController do
   end
 
   describe "POST destroy" do
-    let(:destroy_spot) {FactoryGirl.create(:spot)}
-    let(:destroy_spot2) {FactoryGirl.create(:spot)}
+    before(:each) do
+      @destroy_spot = FactoryGirl.create(:spot)
+      @destroy_spot2 = FactoryGirl.create(:spot)
+    end
     it "destroys spot" do
-      expect(post :destroy, id: destroy_spot.id).to change(Spot, :count).by(1)
+      @destroy_post = post :destroy, id: @destroy_spot.id
+      expect(Spot.count).to be(1)
     end
     it "renders correct page" do
-      expect(post :destroy, id: destroy_spot2.id).to render_template :index
+      expect(post :destroy, id: @destroy_spot2.id).to render_template :index
     end
   end
 

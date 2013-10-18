@@ -14,10 +14,15 @@ class SpotsController < ApplicationController
   end
 
   def show
-    p 'got here'
     @spot = Spot.find(params[:id])
   end
 
   def index
+  end
+
+  def destroy
+    spot = Spot.find(params[:id])
+    spot.destroy
+    render :index
   end
 end
