@@ -6,5 +6,4 @@ describe Spot do
   it { should validate_presence_of(:street) }
   it { should validate_presence_of(:price) }
   it { should validate_presence_of(:type) }
-  it { should validate_presence_of(:user) }
 end
