@@ -1,3 +1,5 @@
+# This is its own file so that we can seed production data seperately from test data
+
 STREET_NAMES = [
   "Alemany Boulevard", "Alvarado Street", "Ambrose Bierce Alley", "Anza Street", "Arguello Boulevard", "Ashbury Street",
   "Baker Street", "Balboa Street", "Bartlett Street", "Beale Street", "Bernal Avenue", "Bluxome Street", "Brannan Street",
