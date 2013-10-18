@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20131017230745) do
     t.integer  "price"
     t.string   "image"
     t.text     "description"
-    t.string   "type"
+    t.string   "location_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "street"
