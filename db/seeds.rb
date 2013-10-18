@@ -51,7 +51,7 @@ def fake_spot_description
   return {
       location_type: my_spot,
       description: my_description,
-      street: my_street
+      street: my_street,
       zipcode: 94102 + rand(88)
     }
 end
