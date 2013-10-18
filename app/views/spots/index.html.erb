@@ -1,1 +1,4 @@
-WE made it here
+<p id="index_title">Available Parking Spots </p>
+<% @spots.each do |spot| %>
+<p>Street: <%= spot.street %> Zipcode: <%= spot.zip_code %>
+<% end %>
