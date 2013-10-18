@@ -28,8 +28,6 @@ class SpotsController < ApplicationController
   end
 
   def destroy
-    p "here we are"
-    p params
     spot = Spot.find(params[:spot][:id])
     spot.destroy
     redirect_to spots_path
