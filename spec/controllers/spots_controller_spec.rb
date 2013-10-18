@@ -39,7 +39,7 @@ describe SpotsController do
   end
 
   describe "GET index" do
-    it "shows index page" do
+    it "shows index page when logged in" do
       expect(get :index).to render_template :index
     end
   end

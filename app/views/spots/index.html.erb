@@ -1,9 +1,11 @@
-Available Spots
+ <%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
+
+<p>Available Spots</p>
 
 <%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
   <%= f.label :spot_number %>
   <%= f.text_field :id %>
-  <%= f.submit %> 
+  <%= f.submit "Choose" %> 
 <% end %>
 
 <% @spots.each do |spot| %>
