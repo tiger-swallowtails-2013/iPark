@@ -51,8 +51,10 @@ def generate_fake_spot_data
   return {
       location_type: my_spot,
       description: my_description,
-      street: my_street,
-      zip_code: 94102 + rand(88)
+      street: rand(1..3000).to_s + " " + my_street,
+      zip_code: 94102 + rand(88),
+      price: rand(1..30),
+      user_id: VALID_USER_IDS.sample
     }
 end
 
@@ -69,29 +71,21 @@ puts "\n----Creating Users-----"
       password_confirmation: "foobar"
     )
   rescue
-    puts "\none randomly generated user failed validation, skipping ahead..."
+    print "x"
   end
 
 end
 
 puts "\n----Creating & Assigning Spots-----"
 
-valid_user_ids = User.pluck(:id)
+VALID_USER_IDS = User.pluck(:id)
 
 80.times do |create_and_assign_spots|
   print "."
   begin
-    my_description = fake_spot_description
-    new_spot = Spot.create!(
-                  user_id: valid_user_ids.sample,
-                  street: my_description[:street],
-                  zip_code: my_description[:zip_code],
-                  price: rand(1..30),
-                  description: my_description[:description],
-                  location_type: my_description[:location_type]
-                )
+    new_spot = Spot.create!(generate_fake_spot_data)
   rescue
-    puts "\none randomly generated parking spot failed validation, skipping ahead..."
+   print "x"
   end
 end
 
