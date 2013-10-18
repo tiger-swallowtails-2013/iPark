@@ -9,6 +9,7 @@ describe SpotsController do
 
   describe "POST signup" do
     before(:each) do
+      Spot.destroy_all
       @new_spot = FactoryGirl.build(:spot)
     end
     it "creates new spot when given valid params" do
