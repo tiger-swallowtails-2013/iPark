@@ -60,17 +60,20 @@ end
   User.create!(
        email: 'test@test.com',
     username: 'test',
-    password: 'test'
+    password: 'test',
+    password_confirmation: 'test'
   )
   User.create!(
        email: 'nishant@test.com',
     username: 'nishant',
-    password: 'nishant'
+    password: 'nishant',
+    password_confirmation: 'nishant'
   )
   User.create!(
        email: 'morgan@test.com',
     username: 'morgan',
-    password: 'morgan'
+    password: 'morgan',
+    password_confirmation: 'morgan'
   )
 end
 
