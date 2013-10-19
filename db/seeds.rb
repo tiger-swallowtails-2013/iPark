@@ -36,7 +36,7 @@ FAKE_SPOTS_COUNT.times do
     spot.description = generate_more_accurate_spot_description(spot.zip_code)
     print "."
   else
-    print "x")
+    print "x"
   end
   sleep GOOGLE_QUERY_SLEEPTIME
 end
