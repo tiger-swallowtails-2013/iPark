@@ -52,6 +52,10 @@ iPark.makeMarker = function (lat, long) {
     title: 'DBC'
   });
   marker.setMap(this.map)
+  google.maps.event.addListener(marker, 'click', function() {
+    iPark.map.setZoom(16);
+    iPark.map.setCenter(marker.getPosition());
+  });
 }
 
 $(document).ready(initialize)
