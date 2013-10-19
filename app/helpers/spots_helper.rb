@@ -1,8 +1,8 @@
-module SpotsHelper
+module CitySearchHelper
   def parse_search(user_input)
     if user_input =~ /\d{5}-?\d{4}?/
       #zipcode
-      find_by_zip(user_input)
+      find_by_zip(user_input[/\d{5}/])
     elsif user_input =~ /^([a-zA-Z]+\s?)+/
       #neighborhood
       find_by_hood(user_input)
@@ -15,15 +15,20 @@ module SpotsHelper
   end
 
   def find_by_zip(input)
-    Spot.where(zip_code: input).limit(10)
+    puts Spot.where(zip_code: input).limit(1)
   end
 
   def find_by_hood(input)
-
-    #checks neighborhood_zipcode_lookup for zipcode
+    zip = CityData.where(neighborhood: input.downcase).select(:zip_code)
+    find_by_zip(zip)
   end
 
   def find_by_address(input)
-    #queries google maps for geo-coordinates and/or zipcode
+    #Geocoder.search(input)
   end
 end
+
+__END__
+
+#test strings:
+["717 California St", "94108", "chinatown", "Noe Valley", "717a California Ave 94108-1232"].each{|str| parse_search(str)}
