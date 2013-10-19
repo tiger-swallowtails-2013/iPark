@@ -3,18 +3,27 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-function getMarkers() {
-  return [[37.792210, -122.406141],
-          [37.778143, -122.390872],
-          [37.78367, -122.490],
-          [37.78339, -122.4167],
-          ]
+function getMarkers(callback) {
+  $.get("spot/find")
+  .done(function(data){
+    callback(data)
+  }).fail(function(){
+    console.log('fail')
+  })
+
+  // return [[37.792210, -122.406141],
+  //         [37.778143, -122.390872],
+  //         [37.78367, -122.490],
+  //         [37.78339, -122.4167],
+  //         ]
 }
 
 
 function initialize() {
   iPark.makeMap()
-  iPark.makeMarkers(getMarkers())
+  getMarkers(function(markers){
+    iPark.makeMarkers(markers)
+  })
 }
 
 
