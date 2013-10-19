@@ -10,7 +10,7 @@ require_relative "./seed_helper"
 FAKE_USERS_COUNT = 1
 FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
 CREATE_TEST_USERS = false # boolean
-GOOGLE_QUERY_SLEEPTIME = 0.25 # necessary to avoid exceeding google's per-second limit
+GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
 
 puts "----SEEDING DATABASE-----"
 puts "\n----Creating Users-----"
@@ -32,7 +32,7 @@ VALID_USER_IDS = User.pluck(:id)
 
 FAKE_SPOTS_COUNT.times do
   spot = Spot.new(generate_fake_spot_data)
-  if spot.save
+  if spot.save # before_save Geocoder adds accurate latitude, longitutude and zipcode
     spot.description = generate_more_accurate_spot_description(spot.zip_code)
     print "."
   else
