@@ -9,7 +9,7 @@ class SpotsController < ApplicationController
     @spot = Spot.new(params.require(:spot).permit(:street, :zip_code, :price, :description, :location_type))
     if @spot.save
       current_user.spots << @spot
-      set_date_span(@spot, params)
+      set_up_reservations(@spot, params)
       redirect_to spots_path
     else
       render :new

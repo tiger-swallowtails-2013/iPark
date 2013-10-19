@@ -29,4 +29,40 @@ module SpotsHelper
     spot.start_date = date_span[:start_date]
   end
 
+  def chosen_days(params)
+    days_of_week = {1 => "monday", 2 => "tuesday", 3 => "wednesday", 4 => "thursday", 5 => "friday", 6 => "saturday", 0 => "sunday"}
+    days_of_week.keep_if do |key, day|
+      params["spot"][day] == "1"
+    end 
+    days_of_week
+  end
+
+  def create_dates_for_reservations(spot, params)
+    days_available = chosen_days(params)
+    dates = []
+    days_available.each do |key, day|
+      start_date = spot.start_date
+      end_date = spot.end_date 
+      day = [key.to_i]
+      result = (start_date..end_date).to_a.select {|k| day.include?(k.wday)}
+      dates << result
+    end
+    dates
+  end
+
+  def create_reservations(spot, params)
+    dates = create_dates_for_reservations(spot, params)
+    dates.each do |date_array|
+      date_array.each do |date|
+        reservation = Reservation.new(date: date)
+        spot.reservations << reservation
+        current_user.reservations << reservation
+      end
+    end
+  end
+
+  def set_up_reservations(spot, params)
+    set_date_span(@spot, params)
+    create_reservations(@spot, params)
+  end
 end
