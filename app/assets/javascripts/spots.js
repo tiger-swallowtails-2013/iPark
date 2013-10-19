@@ -53,10 +53,17 @@ iPark.makeMarker = function (lat, long) {
   });
   marker.setMap(this.map)
   google.maps.event.addListener(marker, 'click', function() {
-    iPark.map.setZoom(16);
+    iPark.map.setZoom(18);
     iPark.map.setCenter(marker.getPosition());
   });
+  google.maps.event.addListener(marker, 'mouseover', function() {
+    iPark.infoWindow.open(iPark.map, marker)
+  });
 }
+
+iPark.infoWindow = new google.maps.InfoWindow({
+  content: "This is a test"
+});
 
 $(document).ready(initialize)
 
