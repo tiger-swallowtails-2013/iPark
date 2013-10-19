@@ -4,3 +4,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 IPark::Application.load_tasks
+
+task 'db:reseed' => ['db:drop', 'db:create', 'db:migrate', 'db:seed']

@@ -1,4 +1,21 @@
+ <%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
+ <%= link_to "List a Spot", :controller => :spots, :action => :new %>
+<p>Available Spots</p>
+
+<%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
+  <%= f.label :spot_number %>
+  <%= f.text_field :id %>
+  <%= f.submit "Choose" %>
+<% end %>
+
+<% @spots.limit(5).each do |spot| %>
+  <p>
+    ID: <%= spot.id %>
+    Street: <%= spot.street %>
+    Zip Code: <%= spot.zip_code %>
+  </p>
+<% end %>
+
+<div id="map-canvas"></div>
 
 
-
-  <div id="map-canvas"></div>
