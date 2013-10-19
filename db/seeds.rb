@@ -1,14 +1,15 @@
 # Seeds development database with fake data to assist design and development.
 # Creates fake users and assigns parking spots to users
-# Uses fake street addresses to query google for geolocation data
-# Updates Spot based on geolocation data (zipcode, neighborhood, description)
+# Uses fake street addresses and queries google for real geolocation data
+# Updates Spot object based on geolocation data (zipcode, neighborhood, description)
 
 require_relative "./geoseeds"
 require_relative "./seed_helper"
 
+#Make sure to adjust magic numbers before seeding the databse:
 FAKE_USERS_COUNT = 1
-FAKE_SPOTS_COUNT = 2
-CREATE_TEST_USERS = false
+FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
+CREATE_TEST_USERS = false # boolean
 GOOGLE_QUERY_SLEEPTIME = 0.25 # necessary to avoid exceeding google's per-second limit
 
 puts "----SEEDING DATABASE-----"
