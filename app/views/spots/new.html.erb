@@ -19,6 +19,14 @@
     Saturday: <%= check_box_tag "spot[saturday]"%>
     Sunday: <%= check_box_tag "spot[sunday]"%>
   </p>
-  <%= f.submit %>
+  <p>Start Date</p>
+  <p>
+    <%= date_select :startDate, options = {:order => [:day, :month, :year]} %>
+  </p>
+  <p>End Date</p>
+  <p>
+    <%= date_select :endDate, options = {:order => [:day, :month, :year]} %>
+  </p>
+  <p><%= f.submit %></p>
 <% end %>
 
