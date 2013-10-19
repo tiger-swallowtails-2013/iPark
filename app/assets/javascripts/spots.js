@@ -49,15 +49,24 @@ iPark.makeMarker = function (lat, long) {
   var myLatlng = new google.maps.LatLng(lat, long)
   var marker = new google.maps.Marker({
     position: myLatlng,
-    title: 'DBC'
+    title: 'Click to Zoom'
   });
   marker.setMap(this.map)
+
   google.maps.event.addListener(marker, 'click', function() {
     iPark.map.setZoom(18);
     iPark.map.setCenter(marker.getPosition());
+    google.maps.event.addListener(marker, 'click', function() {
+      iPark.map.setZoom(13)
+      iPark.map.setCenter(37.7833, -122.4167)
+    })
   });
+
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.open(iPark.map, marker)
+  });
+  google.maps.event.addListener(marker, 'mouseout', function(){
+    iPark.infoWindow.close()
   });
 }
 
