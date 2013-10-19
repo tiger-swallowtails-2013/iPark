@@ -6,13 +6,13 @@
 require_relative "./geoseeds"
 require_relative "./seed_helper"
 
-#Make sure to adjust magic numbers before seeding the databse:
+# Make sure to adjust magic numbers before seeding the databse:
 CREATE_FAKE_USERS = false
   FAKE_USERS_COUNT = 1
   FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
   GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
-CREATE_TEST_USERS = false # boolean
-SEED_CITY_DATABASE = true #boolean
+CREATE_TEST_USERS = false
+SEED_CITY_DATABASE = true
 
 
 if CREATE_FAKE_USERS
