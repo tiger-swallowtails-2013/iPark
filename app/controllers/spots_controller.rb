@@ -35,4 +35,13 @@ class SpotsController < ApplicationController
     spot.destroy
     redirect_to spots_path
   end
+
+  def find
+    spot = Spot.last(10)
+    geolocations = spot.map { |location| [location.latitude, location.longitude] }
+    render json: geolocations.to_json
+  end
+
+
 end
+
