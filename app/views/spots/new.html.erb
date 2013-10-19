@@ -1,14 +1,24 @@
 <%= form_for @spot do |f| %>
-  <%= f.label :user %>
-  <%= f.text_field :user %>
-  <%= f.label :street %>
-  <%= f.text_field :street %>
-  <%= f.label :zip_code %>
-  <%= f.text_field :zip_code %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <%= f.label :location_type %>
-  <%= f.text_field :location_type %>
+  <p>
+    <%= f.label :street %>
+    <%= f.text_field :street %>
+    <%= f.label :zip_code %>
+    <%= f.text_field :zip_code %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <%= f.label :location_type %>
+    <%= f.text_field :location_type %>
+  </p>
+  <p>Availability </p>
+  <p>
+    Monday: <%= check_box_tag "spot[monday]"%> 
+    Tuesday: <%= check_box_tag "spot[tuesday]"%>
+    Wednesday:  <%= check_box_tag "spot[wednesday]"%>
+    Thursday:  <%= check_box_tag "spot[thursday]"%>
+    Friday: <%= check_box_tag "spot[friday]"%>
+    Saturday: <%= check_box_tag "spot[saturday]"%>
+    Sunday: <%= check_box_tag "spot[sunday]"%>
+  </p>
   <%= f.submit %>
 <% end %>
 
