@@ -8,7 +8,7 @@ require_relative "./seed_helper"
 
 #Make sure to adjust magic numbers before seeding the databse:
 FAKE_USERS_COUNT = 1
-FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
+FAKE_SPOTS_COUNT = 10 # limit 2,500 requests per day
 CREATE_TEST_USERS = false # boolean
 GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
 
