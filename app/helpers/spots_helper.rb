@@ -1,11 +1,13 @@
 module SpotsHelper
 
   def create_date(params, type)
-    date_list = params[type]["{:order=>"][":day, :month, :year"]
-    day = date_list["}(3i)"].to_i
-    month = date_list["}(2i)"].to_i
-    year = date_list["}(1i)"].to_i
-    Date.new(year, month, day)
+    unless params[type].nil?
+      date_list = params[type]["{:order=>"][":day, :month, :year"]
+      day = date_list["}(3i)"].to_i
+      month = date_list["}(2i)"].to_i
+      year = date_list["}(1i)"].to_i
+      Date.new(year, month, day)
+    end
   end
 
   def create_date_span(params)
@@ -19,7 +21,7 @@ module SpotsHelper
     date_span = create_date_span(params)
     spot.end_date = date_span[:end_date] 
     spot.start_date = date_span[:start_date]
-    spot.save
+    spot.save 
   end
 
   # parse user's chosen dates

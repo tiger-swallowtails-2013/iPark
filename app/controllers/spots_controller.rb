@@ -17,6 +17,7 @@ class SpotsController < ApplicationController
         redirect_to new_spot_path
       end
     end
+    redirect_to new_spot_path
   end
 
   def show
