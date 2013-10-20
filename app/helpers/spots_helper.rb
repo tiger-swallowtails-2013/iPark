@@ -1,5 +1,7 @@
 module SpotsHelper
 
+  # parse date
+
   def create_start_date(params)
     date_list = params["startDate"]["{:order=>"][":day, :month, :year"]
     day = date_list["}(3i)"].to_i
@@ -27,7 +29,10 @@ module SpotsHelper
     date_span = create_date_span(params)
     spot.end_date = date_span[:end_date] 
     spot.start_date = date_span[:start_date]
+    spot.save
   end
+
+  # parse user's chosen dates
 
   def chosen_days(params)
     days_of_week = {1 => "monday", 2 => "tuesday", 3 => "wednesday", 4 => "thursday", 5 => "friday", 6 => "saturday", 0 => "sunday"}
@@ -36,6 +41,8 @@ module SpotsHelper
     end 
     days_of_week
   end
+
+  # create reservations
 
   def create_dates_for_reservations(spot, params)
     days_available = chosen_days(params)
