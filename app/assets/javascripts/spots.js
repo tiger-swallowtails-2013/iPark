@@ -29,6 +29,8 @@ function initialize() {
 
 iPark = {}
 
+iPark.infoWindow = new google.maps.InfoWindow;
+
 iPark.makeMap = function () {
   var mapOptions = {
     center: new google.maps.LatLng(37.7833, -122.4167),
@@ -65,14 +67,11 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
     iPark.infoWindow.open(iPark.map, marker)
     iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
   });
-  google.maps.event.addListener(marker, 'mouseout', function() {
-    iPark.infoWindow.close()
-  });
 }
 
-iPark.infoWindow = new google.maps.InfoWindow({
+// iPark.infoWindow = new google.maps.InfoWindow({
 
-})
+// })
 
 $(document).ready(initialize)
 
