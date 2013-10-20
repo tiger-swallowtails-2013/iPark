@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+  include SpotsHelper
 
   def new
     @spot = Spot.new
@@ -7,9 +8,11 @@ class SpotsController < ApplicationController
   def create
     @spot = Spot.new(params.require(:spot).permit(:street, :zip_code, :price, :description, :location_type))
     if @spot.save
+      current_user.spots << @spot
+      set_up_reservations(@spot, params)
       redirect_to spots_path
     else
-      render :new
+      redirect_to new_spot_path
     end
   end
 
