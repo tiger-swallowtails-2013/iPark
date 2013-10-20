@@ -57,9 +57,4 @@ module SpotsHelper
       end
     end
   end
-
-  def set_up_reservations(spot, params)
-    set_date_span(@spot, params)
-    create_reservations(@spot, params)
-  end
 end
