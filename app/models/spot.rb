@@ -7,6 +7,6 @@ class Spot < ActiveRecord::Base
       spot_obj.latitude = geo.latitude
       spot_obj.longitude = geo.longitude
     end
-end
+  end
   after_validation :geocode
 end
