@@ -18,7 +18,7 @@
 
 <div id="map-canvas"></div>
 
-<%= form_tag(spots_search_path, method: "post", :remote => true) do %>
+<%= form_tag(spots_search_path, :remote => true, :id => "search") do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>

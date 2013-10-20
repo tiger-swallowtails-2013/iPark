@@ -24,6 +24,7 @@ function initialize() {
   getMarkers(function(markers){
     iPark.makeMarkers(markers)
   })
+  setSearchListener()
 }
 
 
@@ -72,8 +73,11 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
 
 iPark.infoWindow = new google.maps.InfoWindow({
 
-})
-
+function setSearchListener(){
+  $("#search").on("ajax:success", function(e, data){
+    iPark.makeMarkers(data)
+  })
+}
 
 $("input[value='Search']").on("ajax:success", function(e, data){
   iPark.makeMarkers(data)
