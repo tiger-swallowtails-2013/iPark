@@ -8,13 +8,16 @@
   <%= f.submit "Choose" %>
 <% end %>
 
-<% @spots.limit(5).each do |spot| %>
-  <p>
-    ID: <%= spot.id %>
-    Street: <%= spot.street %>
-    Zip Code: <%= spot.zip_code %>
-  </p>
+<% @spots.each do |spot| %>
+  <% if (Date.parse(spot.start_date) >= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
+    <p>
+      <%= spot.street  %>,
+      <%= spot.zip_code %>
+      <%= link_to "Choose a Date", spot_path(spot)%>
+    </p>
+  <% end %>
 <% end %>
+
 
 <div id="map-canvas"></div>
 
