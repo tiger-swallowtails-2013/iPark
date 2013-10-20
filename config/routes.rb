@@ -1,5 +1,6 @@
 IPark::Application.routes.draw do
   resources :spots, only: [:new, :create, :show, :index, :update, :destroy]
+  resources :users, only: [:show]
 
   resources :reservations, only: [:update]
 

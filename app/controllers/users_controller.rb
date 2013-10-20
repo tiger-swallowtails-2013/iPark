@@ -12,4 +12,9 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def show
+    @your_reservations = Reservation.all.where(renter_id: current_user.id.to_s)
+    @your_spots = current_user.spots
+  end
 end
