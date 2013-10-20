@@ -61,7 +61,7 @@ module SpotsHelper
     dates = create_dates_for_reservations(spot, params)
     dates.each do |date_array|
       date_array.each do |date|
-        reservation = Reservation.new(date: date)
+        reservation = Reservation.create(date: date)
         spot.reservations << reservation
         current_user.reservations << reservation
       end
