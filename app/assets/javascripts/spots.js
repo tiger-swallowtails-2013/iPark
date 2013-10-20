@@ -10,12 +10,6 @@ function getMarkers(callback) {
   }).fail(function(){
     console.log('fail')
   })
-
-  // return [[37.792210, -122.406141],
-  //         [37.778143, -122.390872],
-  //         [37.78367, -122.490],
-  //         [37.78339, -122.4167],
-  //         ]
 }
 
 
@@ -68,10 +62,6 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
     iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
   });
 }
-
-// iPark.infoWindow = new google.maps.InfoWindow({
-
-// })
 
 $(document).ready(initialize)
 
