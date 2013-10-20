@@ -61,7 +61,9 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.open(iPark.map, marker)
-    iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
+    var content =  'Address: '  + String(street) + ' parking type: ' + String(location)
+    var link = '<a href=/spots>Reserve this Spot</a>'
+    iPark.infoWindow.setContent(content + link)
   });
 }
 
