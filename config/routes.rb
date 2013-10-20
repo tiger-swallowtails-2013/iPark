@@ -2,6 +2,8 @@ IPark::Application.routes.draw do
   resources :spots, only: [:new, :create, :show, :index, :destroy]
 
   get "spot/find" => "spots#find"
+  post "spots/search" => "spots#search"
+
 
   get "signup" => "users#new", :as => :new_user
   post "signup" => "users#create", :as => :signup_user

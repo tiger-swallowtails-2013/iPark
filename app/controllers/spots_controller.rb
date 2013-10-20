@@ -1,5 +1,6 @@
 class SpotsController < ApplicationController
   include SpotsHelper
+  include CityDatumHelper
 
   def new
     @spot = Spot.new
@@ -37,11 +38,23 @@ class SpotsController < ApplicationController
   end
 
   def find
-    spot = Spot.last(10)
-    geolocations = spot.map { |location| [location.latitude, location.longitude] }
+    spots = Spot.last(10)
+    geolocations = get_latitudes_longitudes(spots)
     render json: geolocations.to_json
   end
 
+  def search
+    query = params[:q]
+    results = parse_search(query)
+    geolocations = get_latitudes_longitudes(results)
+    render json: geolocations.to_json
+  end
+
+  private
+
+  def get_latitudes_longitudes(locations)
+    locations.map { |l| [l.latitude, l.longitude] }
+  end
 
 end
 
