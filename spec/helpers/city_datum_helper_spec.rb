@@ -16,24 +16,25 @@ describe CityDatumHelper do
     end
 
     it "by valid zipcode" do
-      parse_search("99999").should eq(spot)
-      parse_search("99999-9999").should eq(spot)
+      parse_search("99999").should include(spot)
+      parse_search("99999-9999").should include(spot)
     end
     it "by invalid zipcode" do
-      parse_search("999999").should_not eq(spot)
       parse_search("999999").should eq("error parsing search input")
     end
     it "by neighborhood" do
-      expect(parse_search("Test Town")).to eq(spot)
+      parse_search("Test Town").should include(spot)
     end
     it "by street address with zipcode" do
-      expect(parse_search("157 Test Town Dr. San Francisco, CA 99999-9999")).to eq(spot)
-    end
-    pending "by street address without zipcode" do
-      expect(parse_search("157 Test Town Dr")).to eq(spot)
+      parse_search("157 Test Town Dr. San Francisco, CA 99999-9999").should include(spot)
     end
     pending "by nonsensical phrases" do
-      expect(parse_search("nonsensical asdfphrases")).to eq("error parsing search input")
+      parse_search("nonsensical asdfphrases").should eq("error parsing search input")
+    end
+    it "by street address without zipcode [for a real location]" do
+      devbootcamp = Spot.create!(user_id: 1, street: "717 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack")
+      another_location_with_same_zip = Spot.create!(user_id: 1, street: "710 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack")
+      parse_search("717 California St").should include(devbootcamp)
     end
   end
 end
