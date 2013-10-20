@@ -8,33 +8,55 @@ STATUS = [
   "close to AT&T Park", "near Giants Stadium", "motorcycle friendly", "going fast", "in quiet neighborhood", "for commuter", "", "", "", ""
 ]
 
-def generate_fake_spot_data
-  my_spot = SPOT_TYPES.sample
-  my_street = STREET_NAMES.sample
-  my_hood = NEIGHBORHOODS.sample
-  my_status = STATUS.sample
-  my_description = [my_hood, my_street].sample + " " + my_spot + " " + my_status
+def generate_fake_spot_with_real_data
+  begin
+    my_price = rand(1..60)
+    my_spot = SPOT_TYPES.sample
+    my_street = STREET_NAMES.sample
+    my_street_address = rand(1..3000).to_s + " " + my_street
+
+    my_geocoder_data = hitup_google_for_data(my_street_address)
+    my_zip_code = my_geocoder_data.postal_code
+    my_latitude = my_geocoder_data.latitude
+    my_longitude = my_geocoder_data.longitude
+  rescue
+    retry
+  end
+  my_user_id = VALID_USER_IDS.sample
+  my_description = generate_spot_description(my_street, my_zip_code, my_spot)
   return {
       location_type: my_spot,
       description: my_description,
-      street: rand(1..3000).to_s + " " + my_street,
-      zip_code: 94102 + rand(88), # field is reassigned by geocoder in Spot model
-      price: rand(1..30),
-      user_id: VALID_USER_IDS.sample
-    }
+      street: my_street_address,
+      latitude: my_latitude,
+      longitude: my_longitude,
+      zip_code: my_zip_code,
+      price: my_price,
+      user_id: my_user_id
+  }
+
 end
 
-def generate_more_accurate_spot_description(zip_code)
-  my_hood = lookup_neighborhood_of_zipcode(zip_code)
-  my_spot = SPOT_TYPES.sample
+def hitup_google_for_data(street_address)
+  begin
+    Geocoder.search(street_address + " san francisco california").each{|x| return x if x.postal_code[0,3] == "941"}
+  rescue
+    nil
+  end
+end
+
+def generate_spot_description(my_street, my_zip_code, my_spot)
+  begin
+    my_hood_or_street = lookup_neighborhood_of_zipcode(my_zip_code)
+  rescue
+    my_hood_or_street = my_street
+  end
   my_status = STATUS.sample
-  my_description = my_hood + " " + my_spot + " " + my_status
+  my_description = my_hood_or_street + " " + my_spot + " " + my_status
 end
 
 def lookup_neighborhood_of_zipcode(zip_code)
-  if (94102..94134)===zip_code
-    ZIP_CODE_NEIGHBORHOOD_LOOKUP[zip_code.to_s].sample
-  else
-    NEIGHBORHOODS.sample + "*"
+  if hood = ZIP_CODE_NEIGHBORHOOD_LOOKUP[zip_code.to_s].sample
+    return hood
   end
 end
