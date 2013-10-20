@@ -42,17 +42,18 @@ iPark.makeMap = function () {
 iPark.makeMarkers = function (markers) {
   var self = this
   $.each(markers, function(index, element) {
-      self.makeMarker(this.latitude, this.longitude, this.street, this.location_type, this.description )
+      self.makeMarker(element[0], element[1])
   });
 }
 
-iPark.makeMarker = function (lat, long, street, location, description ) {
+iPark.makeMarker = function (lat, long) {
   var myLatlng = new google.maps.LatLng(lat, long)
   var marker = new google.maps.Marker({
     position: myLatlng,
     title: 'Click to Zoom'
   });
   marker.setMap(this.map)
+
   google.maps.event.addListener(marker, 'click', function() {
     iPark.map.setZoom(18);
     iPark.map.setCenter(marker.getPosition());
@@ -64,25 +65,21 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.open(iPark.map, marker)
-    iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
   });
-  google.maps.event.addListener(marker, 'mouseout', function() {
+  google.maps.event.addListener(marker, 'mouseout', function(){
     iPark.infoWindow.close()
   });
 }
 
 iPark.infoWindow = new google.maps.InfoWindow({
+  content: "This is a test"
+});
 
 function setSearchListener(){
   $("#search").on("ajax:success", function(e, data){
     iPark.makeMarkers(data)
   })
 }
-
-$("input[value='Search']").on("ajax:success", function(e, data){
-  iPark.makeMarkers(data)
-})
-
 
 $(document).ready(initialize)
 
