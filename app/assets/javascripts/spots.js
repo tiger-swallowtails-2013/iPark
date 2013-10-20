@@ -74,5 +74,11 @@ iPark.infoWindow = new google.maps.InfoWindow({
   content: "This is a test"
 });
 
+
+$("input[value='Search']").on("ajax:success", function(e, data){
+  iPark.makeMarkers(data)
+})
+
+
 $(document).ready(initialize)
 
