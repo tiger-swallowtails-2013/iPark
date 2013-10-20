@@ -1,6 +1,5 @@
 module SpotsHelper
 
-
   def create_date(params, type)
     date_list = params[type]["{:order=>"][":day, :month, :year"]
     day = date_list["}(3i)"].to_i
