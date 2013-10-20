@@ -14,7 +14,7 @@ describe SpotsController do
       session[:id] = 1 
     end
     it "does not create a new spot with invalid params" do
-      @new_spot = post :create, :spot => {street: @new_spot.street, zip_code: nil, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}
+      new_spot = post :create, :spot => {street: @new_spot.street, zip_code: nil, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}
       expect(Spot.count).to be(0)
     end
     it "renders correct page for invalid spot" do

@@ -16,15 +16,3 @@ feature "user can log out" do
     expect(page).to have_button('Sign In')
   end
 end
-
-feature "user chooses a spot" do
-  let!(:current_user) {FactoryGirl.create(:user)}
-  let!(:test_spot) {FactoryGirl.create(:spot)}
-  scenario "spot is no longer visible" do
-    deleted_id = test_spot.id
-    login(current_user)
-    fill_in 'spot[id]', with: deleted_id
-    click_button "Choose"
-    expect(page).to have_no_content("ID: #{deleted_id}")
-  end
-end
