@@ -39,8 +39,7 @@ class SpotsController < ApplicationController
 
   def find
     spots = Spot.last(10)
-    geolocations = get_latitudes_longitudes(spots)
-    render json: geolocations.to_json
+    render json: spots.to_json
   end
 
   def search

@@ -1,15 +1,7 @@
 module SpotsHelper
 
-  def create_start_date(params)
-    date_list = params["startDate"]["{:order=>"][":day, :month, :year"]
-    day = date_list["}(3i)"].to_i
-    month = date_list["}(2i)"].to_i
-    year = date_list["}(1i)"].to_i
-    Date.new(year, month, day)
-  end
-
-  def create_end_date(params)
-    date_list = params["endDate"]["{:order=>"][":day, :month, :year"]
+  def create_date(params, type)
+    date_list = params[type]["{:order=>"][":day, :month, :year"]
     day = date_list["}(3i)"].to_i
     month = date_list["}(2i)"].to_i
     year = date_list["}(1i)"].to_i
@@ -18,8 +10,8 @@ module SpotsHelper
 
   def create_date_span(params)
     date_span = {
-      end_date: create_end_date(params),
-      start_date: create_start_date(params)
+      end_date: create_date(params, "endDate"),
+      start_date: create_date(params, "startDate")
     }
   end
 
