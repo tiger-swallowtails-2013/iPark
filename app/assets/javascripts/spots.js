@@ -18,6 +18,7 @@ function initialize() {
   getMarkers(function(markers){
     iPark.makeMarkers(markers)
   })
+  setSearchListener()
 }
 
 
@@ -48,6 +49,7 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
     title: 'Click to Zoom'
   });
   marker.setMap(this.map)
+
   google.maps.event.addListener(marker, 'click', function() {
     iPark.map.setZoom(18);
     iPark.map.setCenter(marker.getPosition());
@@ -62,6 +64,13 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
     iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
   });
 }
+
+function setSearchListener(){
+  $("#search").on("ajax:success", function(e, data){
+    iPark.makeMarkers(data)
+  })
+}
+
 
 $(document).ready(initialize)
 
