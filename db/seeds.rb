@@ -1,17 +1,17 @@
-# Seeds development database with fake data to assist design and development.
 # Creates fake users and assigns parking spots to users
 # Uses fake street addresses and queries google for real geolocation data
-# Updates Spot object based on geolocation data (zipcode, neighborhood, description)
 
 require_relative "./geoseeds"
 require_relative "./seed_helper"
 
-# Make sure to adjust magic numbers before seeding the databse:
-CREATE_FAKE_USERS = false
-  FAKE_USERS_COUNT = 1
-  FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
+# Important:
+# - Make sure to adjust magic numbers before seeding the databse
+# - Comment out Geocoder validations in Spot Model
+CREATE_FAKE_USERS = true
+  FAKE_USERS_COUNT = 5
+  FAKE_SPOTS_COUNT = 20 # limit 2,500 requests per day
   GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
-CREATE_TEST_USERS = false
+CREATE_TEST_ACCOUNTS = false
 SEED_CITY_DATABASE = true
 
 
@@ -26,7 +26,6 @@ if CREATE_FAKE_USERS
       password: "foobar",
       password_confirmation: "foobar"
     )
-    user.save ? (print ".") : (print "x")
   end
 
   puts "\n----Creating & Assigning Spots-----"
@@ -35,18 +34,13 @@ if CREATE_FAKE_USERS
   VALID_USER_IDS = User.pluck(:id)
 
   FAKE_SPOTS_COUNT.times do
-    spot = Spot.new(generate_fake_spot_data)
-    if spot.save # before_save Geocoder adds accurate latitude, longitutude and zipcode
-      spot.description = generate_more_accurate_spot_description(spot.zip_code)
-      print "."
-    else
-      print "x"
-    end
+    spot = Spot.new(generate_fake_spot_with_real_data)
+    spot.save ? (print ".") : (print "x")
     sleep GOOGLE_QUERY_SLEEPTIME
   end
 end
 
-if CREATE_TEST_USERS
+if CREATE_TEST_ACCOUNTS
   puts "\n----Creating Test Accounts-----"
   1.times do
     User.create!(
