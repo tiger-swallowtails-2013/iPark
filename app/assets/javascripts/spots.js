@@ -66,7 +66,6 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
     iPark.infoWindow.setContent('Address: ' + String(street) + ' parking type: ' + String(location))
   });
   google.maps.event.addListener(marker, 'mouseout', function() {
-    console.log("hello")
     iPark.infoWindow.close()
   });
 }
