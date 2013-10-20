@@ -4,6 +4,8 @@ IPark::Application.routes.draw do
   resources :reservations, only: [:update]
 
   get "spot/find" => "spots#find"
+  post "spots/search" => "spots#search"
+
 
   get "signup" => "users#new", :as => :new_user
   post "signup" => "users#create", :as => :signup_user

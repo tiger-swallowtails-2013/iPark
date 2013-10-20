@@ -6,39 +6,44 @@
 require_relative "./geoseeds"
 require_relative "./seed_helper"
 
-#Make sure to adjust magic numbers before seeding the databse:
-FAKE_USERS_COUNT = 1
-FAKE_SPOTS_COUNT = 10 # limit 2,500 requests per day
-CREATE_TEST_USERS = false # boolean
-GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
+# Make sure to adjust magic numbers before seeding the databse:
+CREATE_FAKE_USERS = false
+  FAKE_USERS_COUNT = 1
+  FAKE_SPOTS_COUNT = 2 # limit 2,500 requests per day
+  GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
+CREATE_TEST_USERS = false
+SEED_CITY_DATABASE = true
 
-puts "----SEEDING DATABASE-----"
-puts "\n----Creating Users-----"
 
-FAKE_USERS_COUNT.times do
-  user = User.new(
-       email: Faker::Internet.email,
-    username: Faker::Internet.user_name,
-    password: "foobar",
-    password_confirmation: "foobar"
-  )
-  user.save ? (print ".") : (print "x")
-end
+if CREATE_FAKE_USERS
+  puts "----SEEDING DATABASE-----"
+  puts "\n----Creating Users-----"
 
-puts "\n----Creating & Assigning Spots-----"
-puts "This will take #{FAKE_SPOTS_COUNT*GOOGLE_QUERY_SLEEPTIME} seconds"
-
-VALID_USER_IDS = User.pluck(:id)
-
-FAKE_SPOTS_COUNT.times do
-  spot = Spot.new(generate_fake_spot_data)
-  if spot.save # before_save Geocoder adds accurate latitude, longitutude and zipcode
-    spot.description = generate_more_accurate_spot_description(spot.zip_code)
-    print "."
-  else
-    print "x"
+  FAKE_USERS_COUNT.times do
+    user = User.new(
+         email: Faker::Internet.email,
+      username: Faker::Internet.user_name,
+      password: "foobar",
+      password_confirmation: "foobar"
+    )
+    user.save ? (print ".") : (print "x")
   end
-  sleep GOOGLE_QUERY_SLEEPTIME
+
+  puts "\n----Creating & Assigning Spots-----"
+  puts "This will take #{FAKE_SPOTS_COUNT*GOOGLE_QUERY_SLEEPTIME} seconds"
+
+  VALID_USER_IDS = User.pluck(:id)
+
+  FAKE_SPOTS_COUNT.times do
+    spot = Spot.new(generate_fake_spot_data)
+    if spot.save # before_save Geocoder adds accurate latitude, longitutude and zipcode
+      spot.description = generate_more_accurate_spot_description(spot.zip_code)
+      print "."
+    else
+      print "x"
+    end
+    sleep GOOGLE_QUERY_SLEEPTIME
+  end
 end
 
 if CREATE_TEST_USERS
@@ -62,6 +67,15 @@ if CREATE_TEST_USERS
       password: 'morgan',
       password_confirmation: 'morgan'
     )
+  end
+end
+
+if SEED_CITY_DATABASE
+  puts "\n----Populating CityData-----"
+  ZIP_CODE_NEIGHBORHOOD_LOOKUP.each do |zip,hoods|
+    hoods.each do |hood|
+      CityData.create!(zip_code: zip, neighborhood: hood.downcase)
+    end
   end
 end
 

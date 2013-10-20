@@ -16,6 +16,13 @@ ActiveRecord::Schema.define(version: 20131019225836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "city_data", force: true do |t|
+    t.string   "zip_code"
+    t.string   "neighborhood"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reservations", force: true do |t|
     t.integer  "user_id"
     t.integer  "spot_id"
