@@ -12,7 +12,7 @@ class SpotsController < ApplicationController
       set_up_reservations(@spot, params)
       redirect_to spots_path
     else
-      render :new
+      redirect_to new_spot_path
     end
   end
 

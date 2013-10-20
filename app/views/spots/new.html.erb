@@ -21,11 +21,11 @@
   </p>
   <p>Start Date</p>
   <p>
-    <%= date_select :startDate, options = {:order => [:day, :month, :year]} %>
+    <%= date_select :startDate, :order => [:day, :month, :year]%>
   </p>
   <p>End Date</p>
   <p>
-    <%= date_select :endDate, options = {:order => [:day, :month, :year]} %>
+    <%= date_select :endDate, :order => [:day, :month, :year] %>
   </p>
   <p><%= f.submit %></p>
 <% end %>
