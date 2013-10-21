@@ -43,6 +43,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
+  gem 'jasmine'
 end
 
 group :production do
