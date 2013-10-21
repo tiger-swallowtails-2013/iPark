@@ -15,15 +15,19 @@ class Spot < ActiveRecord::Base
   private
 
   def date_cannot_be_in_the_past
-    if Date.parse(start_date) < Date.today
+    if dates_are_present && Date.parse(start_date) < Date.today
       errors.add(:start_date, "can't be in the past")
     end
   end
 
   def start_date_cannot_be_after_end_date
-    if Date.parse(start_date) > Date.parse(end_date)
+    if dates_are_present && Date.parse(start_date) > Date.parse(end_date)
       errors.add(:start_date, "can't be after end_date")
     end
+  end
+
+  def dates_are_present
+    start_date.present? && end_date.present?
   end
 
 end
