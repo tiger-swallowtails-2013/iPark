@@ -17,9 +17,11 @@
         <a data-toggle="collapse" data-target=".nav-collapse" class="brand" href="/"> <%= image_tag("eyePark.png") %></a>
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li class="active"><a href="#">Profile</a></li>
-            <li><a href="#about">List a Spot</a></li>
-            <li><a href="#contact">Login</a></li>
+          <% unless current_user.nil? %>
+            <li><%= link_to "List a Spot", :controller => :spots, :action => :new %></li>
+            <li><%= link_to "Profile", :controller => :users, :action => :show, :id => current_user.id %></li>
+            <li class="active"><%= link_to "Sign Out", :controller => :sessions, :action => :destroy %></li>
+          <% end %>
           </ul>
         </div>
       </div>
