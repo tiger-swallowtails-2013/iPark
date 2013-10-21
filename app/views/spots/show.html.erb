@@ -1,10 +1,1 @@
-<p><%= @spot.street %>, <%= @spot.zip_code%></p>
-<p>Availability:</p>
-<p>
-  <% @spot.reservations.each do |reservation| %>
-    <% if reservation.renter_id == nil %>
-      <p id="<%= reservation.id %>" class="reservation"><%= reservation.date.to_date.inspect %> <%= link_to "Reserve", {:controller => "reservations", :action => "update", :id => reservation.id}, {:method => :put} %>
-</p>
-    <% end %>
-  <% end %>
-</p>
+<%= render partial: "availability", locals: {spot: @spot} %>

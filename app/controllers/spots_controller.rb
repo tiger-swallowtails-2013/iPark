@@ -53,6 +53,10 @@ class SpotsController < ApplicationController
     render json: geolocations.to_json
   end
 
+  def searchresults
+    @spots = Spot.first(5)
+  end
+
   private
 
   def get_latitudes_longitudes(locations)
