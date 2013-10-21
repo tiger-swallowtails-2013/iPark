@@ -1,3 +1,7 @@
 .hidden {
   display: none;
 }
+
+li{
+  line-height: 2.5em;
+}
