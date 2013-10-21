@@ -72,5 +72,7 @@ function setSearchListener(){
 }
 
 
-$(document).ready(initialize)
+$(document).ready(function(){
+  initialize();
+});
 
