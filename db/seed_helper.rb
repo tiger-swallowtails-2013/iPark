@@ -9,16 +9,20 @@ STATUS = [
 ]
 
 def generate_fake_spot_with_real_data
-  begin
     my_price = rand(1..60)
     my_spot = SPOT_TYPES.sample
+
+    dates_data = make_fake_dates
+    my_start_date = dates_data[:start_date]
+    my_end_date = dates_data[:end_date]
+  begin
     my_street = STREET_NAMES.sample
     my_street_address = rand(1..3000).to_s + " " + my_street
 
-    my_geocoder_data = hitup_google_for_data(my_street_address)
-    my_zip_code = my_geocoder_data.postal_code
-    my_latitude = my_geocoder_data.latitude
-    my_longitude = my_geocoder_data.longitude
+    geocoder_data = hitup_google_for_data(my_street_address)
+    my_zip_code = geocoder_data.postal_code
+    my_latitude = geocoder_data.latitude
+    my_longitude = geocoder_data.longitude
   rescue
     retry
   end
@@ -32,9 +36,21 @@ def generate_fake_spot_with_real_data
       longitude: my_longitude,
       zip_code: my_zip_code,
       price: my_price,
-      user_id: my_user_id
+      user_id: my_user_id,
+      start_date: my_start_date,
+      end_date: my_end_date
   }
 
+end
+
+def make_fake_dates
+  start_date = Date.today + rand(1..30)
+  end_date = start_date + rand(1..30)
+  {start_date: format_date(start_date), end_date: format_date(end_date)}
+end
+
+def format_date(date)
+  date.to_s.slice(0,10)
 end
 
 def hitup_google_for_data(street_address)
