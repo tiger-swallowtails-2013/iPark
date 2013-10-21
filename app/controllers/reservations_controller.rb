@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  include ReservationsHelper
+
   def update
     reservation = Reservation.find(params[:id])
     spot = reservation.spot_id
