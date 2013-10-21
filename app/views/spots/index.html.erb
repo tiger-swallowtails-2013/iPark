@@ -11,7 +11,7 @@
 <% end %>
 
 <% @spots.each do |spot| %>
-  <% if (Date.parse(spot.start_date) >= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
+  <% if (Date.parse(spot.start_date) <= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
     <p>
       <%= spot.street  %>,
       <%= spot.zip_code %>
