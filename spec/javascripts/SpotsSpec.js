@@ -7,7 +7,8 @@ describe("map_canvas", function () {
   })
 
    it("should create google map and show San Francisco to user", function() {
-    expect(this.mapOptions.zoom).toEqual(13)
+    expect(iPark.map.mapOptions.zoom).toEqual(13)
+    expect(iPark)
    });
     // $.each(markers, funsction(index, element) {
     //   iPark.zoomIn(marker);

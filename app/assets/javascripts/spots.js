@@ -6,6 +6,7 @@
 function getMarkers(callback) {
   $.get("spot/find")
   .done(function(data){
+    debugger
     console.log(data)
     callback(data)
   }).fail(function(){
@@ -20,10 +21,17 @@ function initialize() {
     iPark.makeMarkers(markers)
   })
   setSearchListener()
+  document.getElementById("search").addEventListener("submit",
+    function(event) {
+      event.preventDefault();
+      iPark.clearMarkers()
+    });
 }
 
 
 iPark = {}
+
+var markersArray = []
 
 iPark.infoWindow = new google.maps.InfoWindow;
 
@@ -49,7 +57,8 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
     position: myLatlng,
     title: 'Click to Zoom'
   });
-  marker.setMap(this.map)
+  marker.setMap(this.map);
+  markersArray.push(marker);
 
   google.maps.event.addListener(marker, 'click', function () {
     iPark.zoomIn(marker)
@@ -64,12 +73,13 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   // });
 
   google.maps.event.addListener(marker, 'mouseover', function() {
+    iPark.infoWindow.setOptions({disableAutoPan : true })
     iPark.infoWindow.open(iPark.map, marker)
     var content =  'Address: '  + String(street) + ' parking type: ' + String(location) + ' '
     var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
     iPark.infoWindow.setContent(content + link)
   });
-}
+ }
 
 iPark.zoomIn = function (marker) {
 
@@ -89,6 +99,13 @@ iPark.zoomOut = function(marker) {
     iPark.zoomIn(marker)
   });
 };
+
+iPark.clearMarkers = function() {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray = []
+}
 
 
 function setSearchListener(){
