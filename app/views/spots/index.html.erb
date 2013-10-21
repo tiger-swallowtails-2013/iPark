@@ -1,30 +1,10 @@
- <%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
- <%= link_to "List a Spot", :controller => :spots, :action => :new %>
-<%= link_to "Profile", :controller => :users, :action => :show, :id => current_user.id %>
-
 <p>Available Spots</p>
-
-<%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
-  <%= f.label :spot_number %>
-  <%= f.text_field :id %>
-  <%= f.submit "Choose" %>
-<% end %>
-
-<% @spots.each do |spot| %>
-  <% if (Date.parse(spot.start_date) <= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
-    <p>
-      <%= spot.street  %>,
-      <%= spot.zip_code %>
-      <%= link_to "Choose a Date", spot_path(spot)%>
-    </p>
-  <% end %>
-<% end %>
-
-
-<div id="map-canvas"></div>
-
 <%= form_tag(spots_search_path, :remote => true, :id => "search") do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>
 <% end %>
+
+
+<div id="map-canvas"></div>
+
