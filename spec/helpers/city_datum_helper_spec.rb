@@ -32,8 +32,8 @@ describe CityDatumHelper do
       parse_search("nonsensical asdfphrases").should eq("error parsing search input")
     end
     it "by street address without zipcode [for a real location]" do
-      devbootcamp = Spot.create!(user_id: 1, street: "717 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack")
-      another_location_with_same_zip = Spot.create!(user_id: 1, street: "710 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack")
+      devbootcamp = Spot.create!(user_id: 1, street: "717 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack", start_date: "2013-10-30", end_date: "2013-10-30")
+      another_location_with_same_zip = Spot.create!(user_id: 1, street: "710 California St", zip_code: 94108, price: 0, description: "Awesome", location_type: "on top of bike rack", start_date: "2013-10-30", end_date: "2013-10-30")
       parse_search("717 California St").should include(devbootcamp)
     end
   end
