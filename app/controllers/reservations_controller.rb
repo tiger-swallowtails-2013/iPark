@@ -12,4 +12,9 @@ class ReservationsController < ApplicationController
     reservation.destroy
     redirect_to user_path(current_user)
   end
+
+  def new
+    @spot = Spot.find(params[:spot])
+    @reservations = @spot.reservations
+  end
 end
