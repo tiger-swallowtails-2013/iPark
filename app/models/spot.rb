@@ -4,13 +4,13 @@ class Spot < ActiveRecord::Base
   has_many :renters, :through => :reservations
   validates_presence_of :zip_code, :street, :price, :location_type, :start_date, :end_date
   validate :date_cannot_be_in_the_past, :start_date_cannot_be_after_end_date
-  geocoded_by :street do |spot_obj,results|
-    if geo = results.first
-      spot_obj.latitude = geo.latitude
-      spot_obj.longitude = geo.longitude
-    end
-  end
-  after_validation :geocode
+  # geocoded_by :street do |spot_obj,results|
+  #   if geo = results.first
+  #     spot_obj.latitude = geo.latitude
+  #     spot_obj.longitude = geo.longitude
+  #   end
+  # end
+  # after_validation :geocode
 
   private
 
