@@ -22,7 +22,7 @@
 
 
 <div id="map-canvas"></div>
-
+<h1 id='autocomplete'></h1>
 <%= form_tag(spots_search_path, :remote => true, :id => "search") do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q) %>
