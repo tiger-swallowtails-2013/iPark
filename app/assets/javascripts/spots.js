@@ -6,6 +6,7 @@
 function getMarkers(callback) {
   $.get("spot/find")
   .done(function(data){
+    console.log(data)
     callback(data)
   }).fail(function(){
     console.log('fail')
