@@ -14,7 +14,13 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @spot = Spot.find(params[:spot])
+    @spot = Spot.find(params[:spot_id])
     @reservations = @spot.reservations
+  end
+
+  def create
+    @spot = Spot.find(params[:spot_id])
+    dates = create_reservations_with_date_objects(params)
+    redirect_to new_reservation_path(spot_id: @spot.id)
   end
 end
