@@ -1,0 +1,5 @@
+Current Dates 
+<% @reservations.each do |reservation| %>
+  <p><%= reservation.date.to_date.inspect %></p>
+<% end %>
+
