@@ -6,7 +6,6 @@
 function getMarkers(callback) {
   $.get("spot/find")
   .done(function(data){
-    debugger
     console.log(data)
     callback(data)
   }).fail(function(){
@@ -61,7 +60,8 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   markersArray.push(marker);
 
   google.maps.event.addListener(marker, 'click', function () {
-    iPark.zoomIn(marker)
+
+    iPark.centerAndZoom(marker);
 });
   // google.maps.event.addListener(marker, 'click', function() {
     // iPark.map.setZoom(18);
@@ -81,24 +81,43 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   });
  }
 
-iPark.zoomIn = function (marker) {
+ iPark.centerAndZoom = function(marker) {
+  if(iPark.currentlyCenteredOn(marker) && iPark.map.getZoom() == 18){
+    iPark.map.setZoom(13);
+  }
+  else{
+    iPark.map.setCenter(marker.getPosition());
+    iPark.map.setZoom(18);
+  }
+ }
 
-  iPark.map.setZoom(18);
-  iPark.map.setCenter(marker.getPosition());
-  // google.maps.event.clearListener(marker, 'click');
-  google.maps.event.addListener(marker, 'click', function() {
-    iPark.zoomOut(marker)
-  });
-};
+ iPark.currentlyCenteredOn = function(marker) {
+    if (iPark.map.getCenter() == marker.position){
+      return true
+    }
+    else{
+      return false
+    }
+ }
 
-iPark.zoomOut = function(marker) {
-   iPark.map.setZoom(13)
-   iPark.map.setCenter(37.7833, -122.4167)
-   // google.maps.event.clearListener(marker, 'click');
-   google.maps.event.addListener(marker, 'click', function() {
-    iPark.zoomIn(marker)
-  });
-};
+// iPark.zoomIn = function (marker) {
+
+//   iPark.map.setZoom(18);
+//   iPark.map.setCenter(marker.getPosition());
+//   // google.maps.event.clearListener(marker, 'click');
+//   google.maps.event.addListener(marker, 'click', function() {
+//     iPark.zoomOut(marker)
+//   });
+// };
+
+// iPark.zoomOut = function(marker) {
+//    iPark.map.setZoom(13)
+//    iPark.map.setCenter(37.7833, -122.4167)
+//    // google.maps.event.clearListener(marker, 'click');
+//    google.maps.event.addListener(marker, 'click', function() {
+//     iPark.zoomIn(marker)
+//   });
+// };
 
 iPark.clearMarkers = function() {
   for (var i = 0; i < markersArray.length; i++) {
