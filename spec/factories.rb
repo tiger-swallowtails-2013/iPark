@@ -9,11 +9,15 @@ FactoryGirl.define do
   end
 
   factory :spot do
-    user_id 1
-    street { Faker::Address.street_name }
-    zip_code { Faker::Address.zip_code }
-    price { rand(1..10) }
-    description { Faker::Company.catch_phrase }
     location_type { ['garage', 'street', 'yard', 'driveway'].sample }
+    description { Faker::Company.catch_phrase }
+    street { Faker::Address.zip_code + "California St"}
+    latitude 12345
+    longitude 12345
+    zip_code '99999'
+    price 30
+    user_id 1
+    start_date { Date.today.to_s.slice(0,10) }
+    end_date { (Date.today + 1).to_s.slice(0,10) }
   end
 end
