@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20131019225836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "date"
-    t.string   "renter_id"
+    t.integer  "renter_id"
   end
 
   create_table "spots", force: true do |t|
