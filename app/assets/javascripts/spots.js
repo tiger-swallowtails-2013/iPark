@@ -54,7 +54,8 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   var myLatlng = new google.maps.LatLng(lat, long)
   var marker = new google.maps.Marker({
     position: myLatlng,
-    title: 'Click to Zoom'
+    title: 'Click to Zoom',
+    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+spot_id+'|FF0000|0000FF'
   });
   marker.setMap(this.map);
   markersArray.push(marker);
@@ -63,14 +64,6 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
 
     iPark.centerAndZoom(marker);
 });
-  // google.maps.event.addListener(marker, 'click', function() {
-    // iPark.map.setZoom(18);
-    // iPark.map.setCenter(marker.getPosition());
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   iPark.map.setZoom(13)
-    //   iPark.map.setCenter(37.7833, -122.4167)
-    // })
-  // });
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.setOptions({disableAutoPan : true })
@@ -99,25 +92,6 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
       return false
     }
  }
-
-// iPark.zoomIn = function (marker) {
-
-//   iPark.map.setZoom(18);
-//   iPark.map.setCenter(marker.getPosition());
-//   // google.maps.event.clearListener(marker, 'click');
-//   google.maps.event.addListener(marker, 'click', function() {
-//     iPark.zoomOut(marker)
-//   });
-// };
-
-// iPark.zoomOut = function(marker) {
-//    iPark.map.setZoom(13)
-//    iPark.map.setCenter(37.7833, -122.4167)
-//    // google.maps.event.clearListener(marker, 'click');
-//    google.maps.event.addListener(marker, 'click', function() {
-//     iPark.zoomIn(marker)
-//   });
-// };
 
 iPark.clearMarkers = function() {
   for (var i = 0; i < markersArray.length; i++) {
