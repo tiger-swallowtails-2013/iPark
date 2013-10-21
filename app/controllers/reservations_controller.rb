@@ -6,4 +6,10 @@ class ReservationsController < ApplicationController
     reservation.save
     redirect_to spot_path(spot)
   end
+
+  def destroy
+    reservation = Reservation.find(params[:id])
+    reservation.destroy
+    redirect_to user_path(current_user)
+  end
 end

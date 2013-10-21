@@ -2,7 +2,7 @@
 
 <p>Spots You've Posted for Rent </p>
 <% @your_spots.each do |spot| %>
-  <p>Address: <%= spot.street %>, <%= spot.zip_code %></p>
+  <p><%= spot.street %>, <%= spot.zip_code %> </p>
   <p>Price: <%= spot.price %></p>
   <p>Availability: <%= spot.start_date %> to <%= spot.end_date %></p>
   <p>
@@ -11,7 +11,9 @@
         <%= spot_reservation.date.to_date.inspect %> 
       </p>
       <p>
-        Available: <%= spot_reservation.renter_id.nil? %>
+        <%if spot_reservation.renter_id.nil? %>
+          <%= link_to "Delete", {:controller => "reservations", :action => "destroy", :id => spot_reservation.id}, {:method => :delete} %>
+        <% end %>
       </p>
     <% end %>
   </p>
