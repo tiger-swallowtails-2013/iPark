@@ -13,15 +13,6 @@ function getMarkers(callback) {
 }
 
 
-function initialize() {
-  iPark.makeMap()
-  getMarkers(function(markers){
-    iPark.makeMarkers(markers)
-  })
-  setSearchListener()
-}
-
-
 iPark = {}
 
 iPark.infoWindow = new google.maps.InfoWindow;
@@ -67,45 +58,12 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   });
 }
 
-$(document).ready(initialize)
 
-
-function setSearchListener(){
-  onKeyboardFocus()
-  onSearchSuccess()
-}
-
-function onSearchSuccess(){
-  $("#search").on("ajax:success", function(e, data){
-    console.log("got to here")
-    iPark.makeMarkers(data)
-  })
-}
-
-function onKeyboardFocus(){
-  $("#q").focus(logKeystrokes())
-}
-
-function logKeystrokes(){
-  $("#q").keyup(function(){
-    var q = $("#q").val()
-    if (q.length > 2){
-      getGuess(q)
-    }
-  })
-}
-
-function getGuess(q){
-  $.get("search/autocomplete", { q: q } )
-  .done(function(data){
-    placeGuess(data)
-  })
-}
-
-function placeGuess(data){
-  $(data).each(function(i,v){
-    if (!($("#autocomplete").text === v)){
-      $("#autocomplete").html(v)
-    }
-  })
+function initializeMap() {
+  if ($('#map-canvas').length > 0){
+    iPark.makeMap()
+    getMarkers(function(markers){
+      iPark.makeMarkers(markers)
+    })
+  }
 }
