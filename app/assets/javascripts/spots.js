@@ -50,14 +50,17 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
   });
   marker.setMap(this.map)
 
-  google.maps.event.addListener(marker, 'click', function() {
-    iPark.map.setZoom(18);
-    iPark.map.setCenter(marker.getPosition());
-    google.maps.event.addListener(marker, 'click', function() {
-      iPark.map.setZoom(13)
-      iPark.map.setCenter(37.7833, -122.4167)
-    })
-  });
+  google.maps.event.addListener(marker, 'click', function () {
+    iPark.zoomIn(marker)
+});
+  // google.maps.event.addListener(marker, 'click', function() {
+    // iPark.map.setZoom(18);
+    // iPark.map.setCenter(marker.getPosition());
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   iPark.map.setZoom(13)
+    //   iPark.map.setCenter(37.7833, -122.4167)
+    // })
+  // });
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.open(iPark.map, marker)
@@ -66,6 +69,26 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
     iPark.infoWindow.setContent(content + link)
   });
 }
+
+iPark.zoomIn = function (marker) {
+
+  iPark.map.setZoom(18);
+  iPark.map.setCenter(marker.getPosition());
+  // google.maps.event.clearListener(marker, 'click');
+  google.maps.event.addListener(marker, 'click', function() {
+    iPark.zoomOut(marker)
+  });
+};
+
+iPark.zoomOut = function(marker) {
+   iPark.map.setZoom(13)
+   iPark.map.setCenter(37.7833, -122.4167)
+   // google.maps.event.clearListener(marker, 'click');
+   google.maps.event.addListener(marker, 'click', function() {
+    iPark.zoomIn(marker)
+  });
+};
+
 
 function setSearchListener(){
   $("#search").on("ajax:success", function(e, data){
