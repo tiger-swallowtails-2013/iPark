@@ -38,11 +38,11 @@ iPark.makeMap = function () {
 iPark.makeMarkers = function (markers) {
   var self = this
   $.each(markers, function(index, element) {
-      self.makeMarker(this.latitude, this.longitude, this.street, this.location_type, this.description )
+      self.makeMarker(this.latitude, this.longitude, this.street, this.location_type, this.description, this.id )
   });
 }
 
-iPark.makeMarker = function (lat, long, street, location, description ) {
+iPark.makeMarker = function (lat, long, street, location, description, spot_id ) {
   var myLatlng = new google.maps.LatLng(lat, long)
   var marker = new google.maps.Marker({
     position: myLatlng,
@@ -61,8 +61,8 @@ iPark.makeMarker = function (lat, long, street, location, description ) {
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.open(iPark.map, marker)
-    var content =  'Address: '  + String(street) + ' parking type: ' + String(location)
-    var link = '<a href=/spots>Reserve this Spot</a>'
+    var content =  'Address: '  + String(street) + ' parking type: ' + String(location) + ' '
+    var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
     iPark.infoWindow.setContent(content + link)
   });
 }
