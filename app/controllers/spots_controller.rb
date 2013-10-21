@@ -49,8 +49,7 @@ class SpotsController < ApplicationController
   def search
     query = params[:q]
     results = parse_search(query)
-    geolocations = get_latitudes_longitudes(results)
-    render json: geolocations.to_json
+    render json: results.to_json
   end
 
   private
