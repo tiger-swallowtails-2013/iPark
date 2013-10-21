@@ -18,6 +18,6 @@
 
 
 $(document).ready(function(){
-  initializeSearch()
   initializeMap()
+  setupAutocomplete()
 })
