@@ -43,6 +43,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'capybara'
+  gem "jasmine", github: "pivotal/jasmine-gem", ref: "e8105401b6ed9d4b462bbbaf508ab7ac8a77a245"
 end
 
 group :production do
