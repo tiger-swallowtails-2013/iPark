@@ -68,11 +68,34 @@ iPark.makeMarker = function (lat, long, street, location, description, spot_id )
 }
 
 function setSearchListener(){
-  $("#search").on("ajax:success", function(e, data){
-    iPark.makeMarkers(data)
-  })
+  onKeyboardInput()
+  onSearchSuccess()
 }
 
 
 $(document).ready(initialize)
 
+function onSearchSuccess(){
+  $("#search").on("ajax:success", function(e, data){
+    console.log("got to here")
+    iPark.makeMarkers(data)
+  })
+}
+
+function onKeyboardInput(){
+  $("#q").focus(function(){
+    $("#q").keyup(function(){
+      var q = $("#q").val()
+        if (q.length > 2){
+          $.get("search/autocomplete", { q: q } )
+          .done(function(data){
+            $(data).each(function(i,v){
+              if (!($("#autocomplete").text === v)){
+                $("#autocomplete").html(v)
+              }
+            })
+          })
+        }
+    })
+  })
+}
