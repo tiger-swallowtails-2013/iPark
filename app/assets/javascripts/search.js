@@ -49,7 +49,8 @@ function clearListings($target){
 
 function buildListItem(i, obj){
   var $item = $('.hidden .listing').clone()
-  $($item.children()[0]).text("#" + i)
+  var num = i + 1
+  $($item.children()[0]).text("#" + num)
   $($item.children()[1]).text(obj.street)
   $($item.children()[2]).text("$" + obj.price)
   $($item.children()[3]).text("Reserve Spot").attr("href", "/spots/" + obj.id)
