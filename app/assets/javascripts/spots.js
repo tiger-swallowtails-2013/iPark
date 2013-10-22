@@ -31,22 +31,18 @@ iPark.makeMap = function () {
 iPark.makeMarkers = function (markers) {
   var self = this
   $.each(markers, function(index, element) {
-      self.makeMarker(this.latitude, this.longitude, this.street, this.location_type, this.description, this.id )
+      self.makeMarker(index, this.latitude, this.longitude, this.street, this.location_type, this.description, this.id )
   });
 }
 
-iPark.makeMarker = function (lat, long, street, location, description, spot_id ) {
+iPark.makeMarker = function (index, lat, long, street, location, description, spot_id ) {
   var myLatlng = new google.maps.LatLng(lat, long)
-  var numbers = [1, 2, 3, 4, 5]
+  var num = index + 1
   var marker = new google.maps.Marker({
     position: myLatlng,
     title: 'Click to Zoom',
-    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+numbers[counter]+'|FF0000|0000FF'
+    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+num+'|FF0000|0000FF'
   });
-  counter = counter + 1
-  if (counter == numbers.length){
-    counter = 0
-  }
   marker.setMap(this.map);
   markersArray.push(marker);
 

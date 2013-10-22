@@ -53,10 +53,10 @@ class SpotsController < ApplicationController
   end
 
   def autocomplete
-    query = params[:q]
-    db_results = CityData.where('neighborhood LIKE ?', "%#{query}%")
-    results = db_results.map{|obj| obj.neighborhood }
-    render json: results.to_json
+    query = params[:q].downcase
+    suggestions = CityData.where('neighborhood LIKE ?', "%#{query}%").select(:neighborhood)
+    suggestions.map!{|obj| obj.neighborhood.titleize }
+    render json: suggestions.to_json
   end
 
 end
