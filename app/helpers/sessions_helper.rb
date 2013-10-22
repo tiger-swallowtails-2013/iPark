@@ -1,6 +1,10 @@
 module SessionsHelper
   def current_user
-    session[:id] ? User.find(session[:id]) : nil
+    if session[:id] && !(User.all.empty?)
+      User.find(session[:id])
+    else
+      nil
+    end
   end
 
   def log_out
