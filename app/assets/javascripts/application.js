@@ -14,18 +14,8 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require turbolinks
+//= require spots
+//= require search_views
+//= require search_controller
+//= require search
 //= require_tree .
-
-
-$(document).ready(function(){
-  initializeMap()
-  setupAutocomplete()
-})
-
-var do_on_load = function(){
-  initializeMap()
-  setupAutocomplete()
-}
-
-$(window).bind('page:change', do_on_load)
-
