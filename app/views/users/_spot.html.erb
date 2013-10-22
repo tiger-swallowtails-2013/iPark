@@ -1,5 +1,6 @@
 <p><%= spot.street %>, <%= spot.zip_code %></p>
 <p>Price: <%= spot.price %></p>
+<p><%= link_to "Add More Dates", {controller: "reservations", action: "new", spot_id: spot} %></p>
 <% reservations.each do |reservation| %>
   <p>Date: <%= reservation.date %></p>
   <% if reservation.renter.present? %>
