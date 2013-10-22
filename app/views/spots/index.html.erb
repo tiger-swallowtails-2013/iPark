@@ -1,32 +1,7 @@
-<div class="navbar">
-<%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
-<%= link_to "List a Spot", :controller => :spots, :action => :new %>
-<%= link_to "Profile", :controller => :users, :action => :show, :id => current_user.id %>
-</div>
-
-<div class='search'>
-<label for="autocomplete">Search: </label>
-<input id="autocomplete">
-</div>
-
-<h1>San Francisco</h1>
 <div id="map-canvas"></div>
-<h3 id="neighborhood">Available Spots:</h3>
-
-<div class="listings">
-<%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
-  <%= f.label :spot_number %>
-  <%= f.text_field :id %>
-  <%= f.submit "Choose" %>
+<%= form_tag(spots_search_path, :remote => true, :id => "search") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
 <% end %>
 
-<% @spots.each do |spot| %>
-  <% if (Date.parse(spot.start_date) <= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
-    <p>
-      <%= spot.street  %>,
-      <%= spot.zip_code %>
-      <%= link_to "Choose a Date", spot_path(spot)%>
-    </p>
-  <% end %>
-<% end %>
-</div>

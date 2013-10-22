@@ -3,15 +3,61 @@
 <head>
   <title>IPark</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&?key=AIzaSyBkNY97z54PKxfPfnGI4XS8S0wM_cnkpY8&sensor=false"></script>
+  <link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
+    <nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/"><%=image_tag("eyePark.png", alt: "Example Image", id: "logo") %></a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+    </form>
+    <ul class="nav navbar-nav navbar-right">
+      <a data-toggle="modal" href="#newSpot" class="btn btn-primary btn-lg">List Spot</a>
+      <% unless current_user.nil? %>
+      <li><%= link_to "Profile", {:controller => :users, :action => :show, :id => current_user.id}, {class: "nav-link"} %></li>
+      <li><%= link_to "Sign Out", {:controller => :sessions, :action => :destroy}, {class: "nav-link"} %></li>
+      <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
 
 <%= yield %>
-
+<div class="modal fade" id="newSpot" tabindex="-1" role="dialog" aria-labelledby="newSpot" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">List a New Parking Spot</h4>
+        </div>
+        <div class="modal-body">
+          <%= render partial: "spots/new" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </body>
 </html>
+
