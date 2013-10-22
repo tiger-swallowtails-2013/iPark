@@ -59,8 +59,4 @@ class SpotsController < ApplicationController
     render json: results.to_json
   end
 
-  def searchresults
-    @spots = Spot.first(5)
-  end
-
 end

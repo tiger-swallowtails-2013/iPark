@@ -27,7 +27,6 @@ function setupAutocomplete(){
   })
 }
 
-
 function updateNeighborhoodTitle(title){
   $("#neighborhood").html("Available Spots in " + title + ":")
 }
