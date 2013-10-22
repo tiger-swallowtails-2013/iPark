@@ -1,12 +1,12 @@
 <div class="navbar">
-<%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
-<%= link_to "List a Spot", :controller => :spots, :action => :new %>
-<%= link_to "Profile", :controller => :users, :action => :show, :id => current_user.id %>
+  <%= link_to "Sign Out", :controller => :sessions, :action => :destroy %>
+  <%= link_to "List a Spot", :controller => :spots, :action => :new %>
+  <%= link_to "Profile", :controller => :users, :action => :show, :id => current_user.id %>
 </div>
 
 <div class='search'>
-<label for="autocomplete">Search: </label>
-<input id="autocomplete">
+  <label for="autocomplete">Search: </label>
+  <input id="autocomplete">
 </div>
 
 <h1>San Francisco</h1>
@@ -14,19 +14,14 @@
 <h3 id="neighborhood">Available Spots:</h3>
 
 <div class="listings">
-<%= form_for(@spot, :url => spot_path(:id), :html => { :method => :delete }) do |f| %>
-  <%= f.label :spot_number %>
-  <%= f.text_field :id %>
-  <%= f.submit "Choose" %>
-<% end %>
+  <%= render "listings" %>
+</div>
 
-<% @spots.each do |spot| %>
-  <% if (Date.parse(spot.start_date) <= Date.today) && (Date.parse(spot.end_date) >= Date.today) %>
-    <p>
-      <%= spot.street  %>,
-      <%= spot.zip_code %>
-      <%= link_to "Choose a Date", spot_path(spot)%>
-    </p>
-  <% end %>
-<% end %>
+<div class="hidden">
+  <div class="listing">
+    <div class="index"></div>
+    <div class="street"></div>
+    <div class="price"></div>
+    <a href="#" class="spot_id"></a>
+  </div>
 </div>
