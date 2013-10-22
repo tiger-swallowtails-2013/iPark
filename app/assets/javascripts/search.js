@@ -22,6 +22,7 @@ function setupAutocomplete(){
         }
       })
       updateNeighborhoodTitle(data)
+      iPark.clearMarkers()
     }
   })
 }
