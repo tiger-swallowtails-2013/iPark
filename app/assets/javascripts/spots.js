@@ -16,7 +16,7 @@ function getMarkers(callback) {
 iPark = {}
 
 var markersArray = []
-
+var counter = 0
 iPark.infoWindow = new google.maps.InfoWindow;
 
 iPark.makeMap = function () {
@@ -37,11 +37,16 @@ iPark.makeMarkers = function (markers) {
 
 iPark.makeMarker = function (lat, long, street, location, description, spot_id ) {
   var myLatlng = new google.maps.LatLng(lat, long)
+  var numbers = [1, 2, 3, 4, 5]
   var marker = new google.maps.Marker({
     position: myLatlng,
     title: 'Click to Zoom',
-    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+spot_id+'|FF0000|0000FF'
+    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+numbers[counter]+'|FF0000|0000FF'
   });
+  counter = counter + 1
+  if (counter == numbers.length){
+    counter = 0
+  }
   marker.setMap(this.map);
   markersArray.push(marker);
 
