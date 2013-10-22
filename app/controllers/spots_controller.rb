@@ -10,6 +10,7 @@ class SpotsController < ApplicationController
     @spot = Spot.new(params.require(:spot).permit(:street, :zip_code, :price, :description, :location_type))
     set_date_span(@spot, params)
     unless @spot.start_date.nil?
+      p @spot
       if @spot.save
         current_user.spots << @spot
         create_reservations(@spot, params)
