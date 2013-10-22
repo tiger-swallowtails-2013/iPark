@@ -3,6 +3,7 @@ module SessionsHelper
     if session[:id] && !(User.all.empty?)
       User.find(session[:id])
     else
+      session[:id] = nil
       nil
     end
   end
