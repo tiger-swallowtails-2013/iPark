@@ -13,11 +13,12 @@
  */
 
 
+
 li{
   line-height: 2.5em;
 }
 
-.navbar-form {
+#searchform {
   line-height: 3.7em;
 }
 
@@ -81,3 +82,4 @@ body {
 #map-canvas {
   height: 50%;
 }
+
