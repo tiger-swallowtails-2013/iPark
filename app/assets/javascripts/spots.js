@@ -13,17 +13,10 @@ function getMarkers(callback) {
 }
 
 
-function initialize() {
-  iPark.makeMap()
-  getMarkers(function(markers){
-    iPark.makeMarkers(markers)
-  })
-  setSearchListener()
-}
-
-
 iPark = {}
 
+var markersArray = []
+var counter = 0
 iPark.infoWindow = new google.maps.InfoWindow;
 
 iPark.makeMap = function () {
@@ -44,37 +37,64 @@ iPark.makeMarkers = function (markers) {
 
 iPark.makeMarker = function (lat, long, street, location, description, spot_id ) {
   var myLatlng = new google.maps.LatLng(lat, long)
+  var numbers = [1, 2, 3, 4, 5]
   var marker = new google.maps.Marker({
     position: myLatlng,
-    title: 'Click to Zoom'
+    title: 'Click to Zoom',
+    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+numbers[counter]+'|FF0000|0000FF'
   });
-  marker.setMap(this.map)
+  counter = counter + 1
+  if (counter == numbers.length){
+    counter = 0
+  }
+  marker.setMap(this.map);
+  markersArray.push(marker);
 
-  google.maps.event.addListener(marker, 'click', function() {
-    iPark.map.setZoom(18);
-    iPark.map.setCenter(marker.getPosition());
-    google.maps.event.addListener(marker, 'click', function() {
-      iPark.map.setZoom(13)
-      iPark.map.setCenter(37.7833, -122.4167)
-    })
-  });
+  google.maps.event.addListener(marker, 'click', function () {
+
+    iPark.centerAndZoom(marker);
+});
 
   google.maps.event.addListener(marker, 'mouseover', function() {
+    iPark.infoWindow.setOptions({disableAutoPan : true })
     iPark.infoWindow.open(iPark.map, marker)
     var content =  'Address: '  + String(street) + ' parking type: ' + String(location) + ' '
     var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
     iPark.infoWindow.setContent(content + link)
   });
+ }
+
+ iPark.centerAndZoom = function(marker) {
+  if(iPark.currentlyCenteredOn(marker) && iPark.map.getZoom() == 18){
+    iPark.map.setZoom(13);
+  }
+  else{
+    iPark.map.setCenter(marker.getPosition());
+    iPark.map.setZoom(18);
+  }
+ }
+
+ iPark.currentlyCenteredOn = function(marker) {
+    if (iPark.map.getCenter() == marker.position){
+      return true
+    }
+    else{
+      return false
+    }
+ }
+
+iPark.clearMarkers = function() {
+  for (var i = 0; i < markersArray.length; i++) {
+    markersArray[i].setMap(null);
+  }
+  markersArray = []
 }
 
-function setSearchListener(){
-  $("#search").on("ajax:success", function(e, data){
-    iPark.makeMarkers(data)
-  })
+function initializeMap() {
+  if ($('#map-canvas').length > 0){
+    iPark.makeMap()
+    getMarkers(function(markers){
+      iPark.makeMarkers(markers)
+    })
+  }
 }
-
-
-$(document).ready(function(){
-  initialize();
-});
-
