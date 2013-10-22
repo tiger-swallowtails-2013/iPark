@@ -1,7 +1,22 @@
+<div class='search'>
+  <label for="autocomplete">Search: </label>
+  <input id="autocomplete">
+</div>
+
+<h1>San Francisco</h1>
 <div id="map-canvas"></div>
-<%= form_tag(search_spots_path, :remote => true, :id => "search") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
-<% end %>
+<h3 id="neighborhood">Available Spots:</h3>
+
+<div class="listings">
+  <%= render "listings" %>
+</div>
+
+<div class="hidden">
+  <div class="listing">
+    <div class="index"></div>
+    <div class="street"></div>
+    <div class="price"></div>
+    <a href="#" class="spot_id"></a>
+  </div>
+</div>
 
