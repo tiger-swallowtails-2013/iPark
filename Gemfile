@@ -47,6 +47,10 @@ group :test, :development do
   gem "jasmine", github: "pivotal/jasmine-gem", ref: "e8105401b6ed9d4b462bbbaf508ab7ac8a77a245"
 end
 
+group :development do
+  gem 'pry'
+end
+
 group :production do
   gem 'rails_12factor'
   gem 'faker'

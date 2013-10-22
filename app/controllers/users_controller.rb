@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @your_reservations = Reservation.all.where(renter_id: current_user.id.to_s)
+    @your_reservations = current_user.rented_reservations
     @your_spots = current_user.spots
   end
 end
