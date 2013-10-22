@@ -49,18 +49,14 @@ class SpotsController < ApplicationController
   def search
     query = params[:q]
     results = parse_search(query)
-    geolocations = get_latitudes_longitudes(results)
-    render json: geolocations.to_json
+    render json: results.to_json
   end
 
-  def searchresults
-    @spots = Spot.first(5)
-  end
-
-  private
-
-  def get_latitudes_longitudes(locations)
-    locations.map { |l| [l.latitude, l.longitude] }
+  def autocomplete
+    query = params[:q]
+    db_results = CityData.where('neighborhood LIKE ?', "%#{query}%")
+    results = db_results.map{|obj| obj.neighborhood }
+    render json: results.to_json
   end
 
 end

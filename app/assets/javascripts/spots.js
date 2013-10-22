@@ -13,20 +13,6 @@ function getMarkers(callback) {
 }
 
 
-function initialize() {
-  iPark.makeMap()
-  getMarkers(function(markers){
-    iPark.makeMarkers(markers)
-  })
-  setSearchListener()
-  document.getElementById("search").addEventListener("submit",
-    function(event) {
-      event.preventDefault();
-      iPark.clearMarkers()
-    });
-}
-
-
 iPark = {}
 
 var markersArray = []
@@ -99,15 +85,11 @@ iPark.clearMarkers = function() {
   markersArray = []
 }
 
-
-function setSearchListener(){
-  $("#search").on("ajax:success", function(e, data){
-    iPark.makeMarkers(data)
-  })
+function initializeMap() {
+  if ($('#map-canvas').length > 0){
+    iPark.makeMap()
+    getMarkers(function(markers){
+      iPark.makeMarkers(markers)
+    })
+  }
 }
-
-
-$(document).ready(function(){
-  initialize();
-});
-
