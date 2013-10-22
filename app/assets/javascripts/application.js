@@ -21,3 +21,10 @@ $(document).ready(function(){
   initializeMap()
   setupAutocomplete()
 })
+
+var do_on_load = function(){
+  initializeMap()
+  setupAutocomplete()
+}
+
+$(window).bind('page:change', do_on_load)
