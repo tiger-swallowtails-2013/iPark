@@ -15,10 +15,10 @@ class SpotsController < ApplicationController
         create_reservations(@spot, params)
         redirect_to spots_path and return
       else
-        redirect_to new_spot_path and return
+        redirect_to spots_path and return
       end
     end
-    redirect_to new_spot_path and return
+    redirect_to spots_path and return
   end
 
   def show

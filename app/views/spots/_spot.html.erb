@@ -1,4 +1,4 @@
-<%= form_for @spot do |f| %>
+<%= form_for :spot, url: new_spot_path do |f| %>
   <p>
     <%= f.label :street %>
     <%= f.text_field :street %>
