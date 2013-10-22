@@ -6,13 +6,15 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&?key=AIzaSyBkNY97z54PKxfPfnGI4XS8S0wM_cnkpY8&sensor=false"></script>
   <link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
   <link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
   <div class="navbar navbar-simple navbar-static-top">
-    <div class="navbar-inner">
+    <div class="navbar-inner" id="navbar-total">
         <div class="container">
           <a data-toggle="collapse" data-target=".nav-collapse" class="brand" href="/"> <%= image_tag("eyePark.png") %></a>
           <div class="nav-collapse collapse">
@@ -24,11 +26,14 @@
             <% end %>
             </ul>
           </div>
-        <form class="navbar-form" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control search-query span2" placeholder="Search">
+          <div id="searchform">
+            <form class="navbar-form" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control search-query span2" placeholder="Search">
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
