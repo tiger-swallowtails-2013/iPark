@@ -34,7 +34,12 @@
     <ul class="nav navbar-nav navbar-right">
       <a data-toggle="modal" href="#newSpot" class="btn btn-primary btn-lg">List Spot</a>
       <% unless current_user.nil? %>
-      <li id="profile"><%= link_to "Profile", {:controller => :users, :action => :show, :id => current_user.id}, {class: "nav-link"} %></li>
+        <% if current_user.notification == false %>
+          <li id="profile">
+        <% else %>
+          <li id="profile" class="active">
+        <% end %>
+      <%= link_to "Profile", {:controller => :users, :action => :show, :id => current_user.id}, {class: "nav-link"} %></li>
       <li><%= link_to "Sign Out", {:controller => :sessions, :action => :destroy}, {class: "nav-link"} %></li>
       <% end %>
     </ul>
