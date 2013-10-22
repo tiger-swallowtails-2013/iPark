@@ -12,7 +12,7 @@ describe SpotsController do
       expect(Spot.count).to be(0)
     end
     it "renders correct page for invalid spot" do
-      expect(post :create, :spot => {street: @new_spot.street, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}).to redirect_to new_spot_path
+      expect(post :create, :spot => {street: @new_spot.street, price: @new_spot.price, description: @new_spot.description, location_type: @new_spot.location_type}).to redirect_to spots_path
     end
     after(:each) do
       Spot.destroy_all
