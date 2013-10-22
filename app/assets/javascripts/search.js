@@ -3,9 +3,7 @@ function setupAutocomplete(){
     source: function(request, response){
       $.ajax({
         url: "search/autocomplete",
-        data: {
-          q: request.term
-        },
+        data: {q: request.term},
         success: function(data){
           response(data)
         }
