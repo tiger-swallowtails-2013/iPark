@@ -28,3 +28,4 @@ var do_on_load = function(){
 }
 
 $(window).bind('page:change', do_on_load)
+

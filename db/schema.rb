@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019225836) do
+ActiveRecord::Schema.define(version: 20131022183037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131019225836) do
     t.datetime "updated_at"
     t.string   "date"
     t.integer  "renter_id"
+    t.boolean  "notification", default: false
   end
 
   create_table "spots", force: true do |t|
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20131019225836) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "notification",          default: false
   end
 
 end
