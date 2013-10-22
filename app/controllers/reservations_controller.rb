@@ -6,6 +6,8 @@ class ReservationsController < ApplicationController
     spot = reservation.spot_id
     reservation.update_attribute(:renter_id, current_user.id)
     if reservation.save
+      reservation.update_attribute(:notification, true)
+      User.first.update_attribute(:notification, true)
       redirect_to spot_path(spot)
     else
       redirect_to spot_path(spot)
