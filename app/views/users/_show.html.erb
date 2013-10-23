@@ -2,12 +2,12 @@
 
 <p>Spots You've Rented</p>
 <%  current_user.rented_reservations.each do |reservation| %>
-  <%= render partial: "spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
+  <%= render partial: "users/spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
 <% end %>
 
 <p>Spots You've Posted for Rent </p>
 <% current_user.spots.each do |spot| %>
-  <%= render partial: "spot", locals: { spot: spot, reservations: spot.reservations } %>
+  <%= render partial: "users/spot", locals: { spot: spot, reservations: spot.reservations } %>
 <% end %>
 
 <div id="notification-head">
