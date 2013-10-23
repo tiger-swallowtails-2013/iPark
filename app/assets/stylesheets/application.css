@@ -137,7 +137,6 @@ h3#neighborhood {
   max-width: 300px;
   margin-left: 5%;
   height:600px;
-  background: lightyellow;
 }
 .map_container{
   width: 50%;
@@ -162,7 +161,6 @@ h3#neighborhood {
 @media (max-width: 1047px){
 
   .map_and_listings_container {
-    background: blue;
     width: 100%;
   }
   .listings-container {
@@ -177,14 +175,12 @@ h3#neighborhood {
 
 }
 
-@media (max-width: 825px){
+@media (max-width: 830px){
   .map_container{
-    background:green;
-    z-index:1000;
     width: 50%;
     min-width: 20em;
     height: 0px;
-    padding-bottom:30%;
+    padding-bottom:25%;
     position: relative;
   }
 
