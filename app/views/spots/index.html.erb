@@ -1,22 +1,21 @@
-<div class='search'>
-  <label for="autocomplete">Search: </label>
-  <input id="autocomplete">
-</div>
+<div class="map_and_listings_container">
+  <div id="map-canvas"></div>
 
-<h1>San Francisco</h1>
-<div id="map-canvas"></div>
-<h3 id="neighborhood">Available Spots:</h3>
-
-<div class="listings">
-  <%= render "listings" %>
+  <div class="listings-container">
+    <h3 id="neighborhood">Available Spots:</h3>
+    <div class="listings">
+      <%= render "listings" %>
+    </div>
+  </div>
 </div>
 
 <div class="hidden">
-  <div class="listing">
-    <div class="index"></div>
-    <div class="street"></div>
-    <div class="price"></div>
-    <a href="#" class="spot_id">Reserve Spot</a>
-  </div>
+  <ul class="listing list-group">
+    <span class="index badge"></span>
+    <span class="street"></span>
+    </br>
+    <span><a href="#" class="spot_id">Reserve Spot</a></span>
+    <span class="price"></span>
+  </ul>
 </div>
 

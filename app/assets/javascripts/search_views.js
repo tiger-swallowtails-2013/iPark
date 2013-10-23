@@ -17,7 +17,7 @@ var NeighborhoodView = function(name) {
 }
 
 NeighborhoodView.prototype.render = function() {
-  this.$elem.html("Available Spots in " + this.name + ":");
+  this.$elem.html(this.name);
 }
 
 
@@ -51,7 +51,7 @@ var ListingView = function(index, listing) {
 }
 
 ListingView.prototype.render = function() {
-  this.$elem.find('.index').text("#" + this.index);
+  this.$elem.find('.index').text(this.index);
   this.$elem.find('.street').text(this.listing.street);
   this.$elem.find('.price').text("$" + this.listing.price);
   this.$elem.find('a.spot_id').attr("href", "/spots/" + this.listing.id);
