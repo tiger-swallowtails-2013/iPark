@@ -41,7 +41,7 @@ iPark.makeMarker = function (index, lat, long, street, location, description, sp
   var marker = new google.maps.Marker({
     position: myLatlng,
     title: 'Click to Zoom',
-    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+num+'|FF0000|0000FF'
+    icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld='+num+'|FF0000|000000'
   });
   marker.setMap(this.map);
   markersArray.push(marker);
