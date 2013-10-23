@@ -26,13 +26,6 @@ class SpotsController < ApplicationController
   end
 
   def index
-    @spot = Spot.new
-    @spots = Spot.limit(20)
-    if signed_in?
-      render :index
-    else
-      redirect_to new_session_path
-    end
   end
 
   def destroy
