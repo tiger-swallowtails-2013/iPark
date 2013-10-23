@@ -118,10 +118,8 @@ body {
 
 #map-canvas {
   height: 100%;
-  width: 50%;
+  width: 100%;
   float: left;
-  min-width: 20em;
-
 }
 
 h3#neighborhood {
@@ -135,11 +133,19 @@ h3#neighborhood {
 .listings-container {
   float: left;
   width: 35%;
-  min-width: 18em;
+  min-width: 20em;
+  max-width: 300px;
   margin-left: 5%;
   height:600px;
   background: lightyellow;
 }
+.map_container{
+  width: 50%;
+  height: 100%;
+  float: left;
+  min-width: 20em;
+}
+
 .listings {
   overflow:auto;
   height:95%;
@@ -151,4 +157,24 @@ h3#neighborhood {
 
 .navbar button {
   margin-right: 1px;
+}
+
+@media (max-width: 1047px){
+
+  .map_and_listings_container {
+    background: blue;
+    width: 100%;
+  }
+  #map-canvas {
+    max-height: 100%;
+    max-width: 100%;
+    position:absolute;
+  }
+  .listings-container {
+    width: 100%;
+    min-width: 20em;
+    margin-left: 0%;
+    height:100%
+  }
+
 }
