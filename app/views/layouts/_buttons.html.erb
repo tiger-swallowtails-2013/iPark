@@ -23,7 +23,7 @@
         <h4 class="modal-title">Profile</h4>
       </div>
       <div class="modal-body">
-        <%= render partial: "users/show" %>
+        <%= render partial: "users/show" if current_user %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
