@@ -1,5 +1,6 @@
 var SearchController = {
   setupAutocomplete: function() {
+    onUserEnter()
     $("#autocomplete").autocomplete({
       source: SearchController.onUserKeystroke,
       minLength: 2,
@@ -18,14 +19,36 @@ var SearchController = {
   },
 
   findSpots: function(e, ui){
-    iPark.clearMarkers();
-    var userInput = $(this).val();
+    alert("made it here")
+    console.log(e)
+     iPark.clearMarkers();
+    debugger
+    var userInput = $("#autocomplete").val();
+    console.log(userInput)
+    debugger
     $.ajax({
       url:"search/spots",
       data: {q: userInput}
     }).done(function(listings){
+      debugger
       var searchView = new SearchView(userInput, listings);
       searchView.render();
     });
   }
 }
+
+function onUserEnter() {
+  window.addEventListener('keypress', function (e) {
+    if (e.keyCode == 13) {
+    SearchController.findSpots(e)
+    }
+  }, false);
+}
+
+// on enter being hit call searh controller.findspots give it the event
+
+
+
+// if valid zipcode send back listing based on zip code without converting to neighboorhood
+// if address send back listing that matches street!
+// populate autocomplete database library with potential zips/
