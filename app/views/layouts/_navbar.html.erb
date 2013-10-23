@@ -18,15 +18,22 @@
       </div>
     </form>
     <ul class="nav navbar-nav navbar-right">
-      <a data-toggle="modal" href="#newSpot" class="btn btn-primary btn-lg">List Spot</a>
+      <li>
+        <a data-toggle="modal" href="#newSpot" class="btn btn-primary btn-md">List Spot</a>
+      </li>
       <% unless current_user.nil? %>
-        <% if current_user.notification == false %>
-          <li id="profile">
-        <% else %>
-          <li id="profile" class="active">
-        <% end %>
-      <%= link_to "Profile", {:controller => :users, :action => :show, :id => current_user.id}, {class: "nav-link"} %></li>
-      <li><%= link_to "Sign Out", {:controller => :sessions, :action => :destroy}, {class: "nav-link"} %></li>
+      <% if current_user.notification == false %>
+      <li id="profile">
+      <% else %>
+      <li id="profile" class="active">
+      <% end %>
+      </li>
+      <li>
+        <a data-toggle="modal" href="#profile" class="btn btn-primary btn-md">Profile</a>
+      </li>
+      <li>
+        <a data-toggle="modal" href="#signout" class="btn btn-primary btn-md">Sign Out</a>
+      </li>
       <% end %>
     </ul>
   </div><!-- /.navbar-collapse -->
