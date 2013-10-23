@@ -20,10 +20,11 @@
 #searchform {
   line-height: 3.7em;
 }
-
+*/
 .navbar {
-    height: 10px;
-}*/
+  margin: 0 auto;
+  max-width: 1048px;
+}
 
 .nav-link {
   line-height: 2em !important;
