@@ -136,9 +136,12 @@ h3#neighborhood {
   float: left;
   width: 35%;
   min-width: 18em;
-  height:600px;
   margin-left: 5%;
+  height:600px;
+}
+.listings {
   overflow:auto;
+  height:95%;
 }
 
 .hidden {
