@@ -31,6 +31,10 @@
 .navbar-left {
   line-height: 3em;
 }
+
+.navbar-right {
+  line-height: 4em;
+}
 .navbar-brand {
   line-height: 10em;
   height: 4em;
