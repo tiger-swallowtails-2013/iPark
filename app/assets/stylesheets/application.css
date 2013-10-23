@@ -21,9 +21,10 @@
   line-height: 3.7em;
 }
 */
-.navbar {
-  margin: 0 auto;
+
+.nav-inner-container{
   max-width: 1048px;
+  margin: 0 auto;
 }
 
 .nav-link {
