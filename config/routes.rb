@@ -14,6 +14,7 @@ IPark::Application.routes.draw do
   post "login" => "sessions#create", :as => :login_session
   get "logout" => "sessions#destroy", :as => :logout_session
   get "searchresults" => "spots#searchresults"
+  get "search/hood" => "spots#hood"
 
   root :to => 'spots#index'
 end

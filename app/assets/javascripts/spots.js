@@ -47,9 +47,8 @@ iPark.makeMarker = function (index, lat, long, street, location, description, sp
   markersArray.push(marker);
 
   google.maps.event.addListener(marker, 'click', function () {
-
-    iPark.centerAndZoom(marker);
-});
+    iPark.focusOnMarker(marker)
+  });
 
   google.maps.event.addListener(marker, 'mouseover', function() {
     iPark.infoWindow.setOptions({disableAutoPan : true })
@@ -58,6 +57,11 @@ iPark.makeMarker = function (index, lat, long, street, location, description, sp
     var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
     iPark.infoWindow.setContent(content + link)
   });
+ }
+
+ iPark.focusOnMarker = function(){
+    iPark.centerAndZoom(marker);
+    // also highlight selected div
  }
 
  iPark.centerAndZoom = function(marker) {

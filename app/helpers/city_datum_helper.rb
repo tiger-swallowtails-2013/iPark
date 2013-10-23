@@ -1,4 +1,4 @@
-module CityDatumHelper
+  module CityDatumHelper
   def parse_search(user_input)
     if user_input =~ /(?:^|\s)(\d{5}|\d{5}-\d{4})(?:\s|$)/
       find_by_zip(user_input[/\d{5}/])
@@ -12,7 +12,7 @@ module CityDatumHelper
   end
 
   def find_by_zip(input)
-    Spot.where(zip_code: input)
+    return Spot.where(zip_code: input)
   end
 
   def find_by_hood(input)

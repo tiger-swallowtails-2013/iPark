@@ -44,6 +44,7 @@ class SpotsController < ApplicationController
   def search
     query = params[:q] || "94108"
     results = parse_search(query)
+    # area = CityData.find_by_zip_code(results.first)
     render json: results.to_json
   end
 
@@ -54,4 +55,11 @@ class SpotsController < ApplicationController
     render json: suggestions.to_json
   end
 
+  def hood
+    query = params[:q].to_i
+    p query
+    results = CityData.find_by_zip_code(query)
+    results.map!{ |place| place.neighborhood }
+    render json: results.to_json
+  end
 end
