@@ -133,8 +133,9 @@ h3#neighborhood {
   float: left;
   width: 35%;
   min-width: 18em;
-  height: 100%;
+  height:600px;
   margin-left: 5%;
+  overflow:auto;
 }
 
 .hidden {
