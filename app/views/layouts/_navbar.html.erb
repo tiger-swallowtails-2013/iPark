@@ -30,7 +30,7 @@
           <button data-toggle="modal" href="#profile" class="btn btn-primary btn-mini">Profile</button>
         </li>
         <li>
-          <button data-toggle="modal" href="#signout" class="btn btn-primary btn-mini">Sign Out</button>
+          <%= button_to "Sign Out", {controller: "sessions", action: "destroy"}, class: "btn btn-primary btn-mini" %>
         </li>
 
       <% else %>
