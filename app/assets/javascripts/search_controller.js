@@ -19,18 +19,13 @@ var SearchController = {
   },
 
   findSpots: function(e, ui){
-    alert("made it here")
     console.log(e)
      iPark.clearMarkers();
-    debugger
     var userInput = $("#autocomplete").val();
-    console.log(userInput)
-    debugger
     $.ajax({
       url:"search/spots",
       data: {q: userInput}
     }).done(function(listings){
-      debugger
       var searchView = new SearchView(userInput, listings);
       searchView.render();
     });
