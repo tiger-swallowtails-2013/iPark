@@ -13,6 +13,10 @@
  */
 
 
+ /* TODO-JEFFREY: Why hast thou forsaken me? application.css is a Sprockets file that should just contain the require statements above */
+
+
+
 /*#logo {
   margin-top: -.1.3 em;
 }
@@ -139,4 +143,8 @@ h3#neighborhood {
 
 .hidden {
   display:none;
+}
+
+.navbar button {
+  margin-right: 1px;
 }
