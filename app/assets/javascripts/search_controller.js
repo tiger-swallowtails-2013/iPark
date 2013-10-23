@@ -40,7 +40,6 @@ function onUserEnter() {
   }, false);
 }
 
-// on enter being hit call searh controller.findspots give it the event
 
 
 
