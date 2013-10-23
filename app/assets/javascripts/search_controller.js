@@ -19,7 +19,6 @@ var SearchController = {
   },
 
   findSpots: function(e, ui){
-    console.log(e)
      iPark.clearMarkers();
     var userInput = $("#autocomplete").val();
     $.ajax({
