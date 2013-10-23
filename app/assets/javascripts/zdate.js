@@ -20,8 +20,6 @@ function datepick() {
   })
 }
 
-$(document).ready(datepick())
-
-
-
-
+$(document).ready(function(){
+  datepick()
+});
