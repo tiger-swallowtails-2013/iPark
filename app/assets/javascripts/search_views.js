@@ -17,7 +17,7 @@ var NeighborhoodView = function(name) {
 }
 
 NeighborhoodView.prototype.render = function() {
-  this.$elem.html("Available Spots in " + this.name + ":");
+  this.$elem.html(this.name);
 }
 
 
