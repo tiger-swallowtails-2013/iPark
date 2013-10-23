@@ -138,6 +138,7 @@ h3#neighborhood {
   min-width: 18em;
   margin-left: 5%;
   height:600px;
+  background: lightyellow;
 }
 .listings {
   overflow:auto;

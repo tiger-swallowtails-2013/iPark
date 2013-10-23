@@ -35,6 +35,6 @@ class ReservationsController < ApplicationController
     current_user.update_attribute(:notification, false)
     active_reservations = Reservation.where(notification: true)
     active_reservations.each {|reservation| reservation.update_attribute(:notification, false)}
-    redirect_to user_path(current_user)
+    redirect_to spots_path
   end
 end

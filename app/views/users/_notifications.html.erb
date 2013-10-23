@@ -1,15 +1,3 @@
-<p>Hi, <%= current_user.username %>!</p>
-
-<p>Spots You've Rented</p>
-<% @your_reservations.each do |reservation| %>
-  <%= render partial: "spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
-<% end %>
-
-<p>Spots You've Posted for Rent </p>
-<% @your_spots.each do |spot| %>
-  <%= render partial: "spot", locals: { spot: spot, reservations: spot.reservations } %>
-<% end %>
-
 <div id="notification-head">
   <p>Notifications</p>
     <div id="notifications-list">

@@ -10,20 +10,3 @@
   <%= render partial: "users/spot", locals: { spot: spot, reservations: spot.reservations } %>
 <% end %>
 
-<div id="notification-head">
-  <p>Notifications</p>
-    <div id="notifications-list">
-    <% if current_user.notification == true %>
-      <% current_user.reservations.each do |reservation|%>
-        <% if reservation.notification == true %>
-          <% spot = Spot.find(reservation.spot_id) %>
-          <p><%= spot.street.to_s %>, <%= spot.zip_code %></p>
-          <p><%= reservation.date %>, Rented By: <%= User.find(reservation.renter_id).username %></p>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p> No new notifications! </p>
-    <% end %>
-    <%= button_to "Clear Notifications", :controller=> "reservations", :action => "clear_notifications" %>
-    </div>
-</div>
