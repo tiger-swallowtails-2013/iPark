@@ -27,7 +27,7 @@ class SpotsController < ApplicationController
 
   def index
     @spot = Spot.new
-    @spots = Spot.all
+    @spots = Spot.limit(20)
     if signed_in?
       render :index
     else
@@ -41,13 +41,8 @@ class SpotsController < ApplicationController
     redirect_to spots_path
   end
 
-  def find
-    spots = Spot.last(10)
-    render json: spots.to_json
-  end
-
   def search
-    query = params[:q]
+    query = params[:q] || "94108"
     results = parse_search(query)
     render json: results.to_json
   end
