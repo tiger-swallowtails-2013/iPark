@@ -95,17 +95,20 @@ html {
 }
 
 body {
-  height: 100%; margin: 0; padding: 0
+  height: 100%;
+  margin: 0;
+  padding: 0
 }
 
 
 .map_and_listings_container {
   margin: 0 auto;
   position: relative;
-  width: 100%;
+  width: 1048px;
+  min-width: 20em;
   height:600px;
-  padding-left: 6em;
-  padding-right:6em;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 2em;
 }
 
@@ -113,6 +116,7 @@ body {
   height: 100%;
   width: 50%;
   float: left;
+  min-width: 20em;
 
 }
 
@@ -127,8 +131,9 @@ h3#neighborhood {
 .listings-container {
   float: left;
   width: 35%;
+  min-width: 18em;
   height: 100%;
-  padding-left: 6em;
+  margin-left: 5%;
 }
 
 .hidden {
