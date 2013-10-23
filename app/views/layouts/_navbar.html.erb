@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="nav-inner-container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -7,7 +8,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="/"><%=image_tag("eyePark.png", alt: "Example Image", id: "logo") %></a>
+    <a href="/"><%=image_tag("eyePark.png", alt: "iPark logo", id: "logo") %></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,17 +17,19 @@
       <div class="form-group">
         <input id="autocomplete" type="text" class="form-control" placeholder="Search">
       </div>
+      <button class="btn btn-primary btn-mini"><i class="icon-calendar"></i> Today</button>
     </form>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <a data-toggle="modal" href="#newSpot" class="btn btn-primary btn-md">List Spot</a>
+        <button data-toggle="modal" href="#newSpot" class="btn btn-primary btn-mini">List Spot</button>
       </li>
       <li>
-        <a data-toggle="modal" href="#profile" class="btn btn-primary btn-md">Profile</a>
+        <button data-toggle="modal" href="#profile" class="btn btn-primary btn-mini">Profile</button>
       </li>
       <li>
-        <a data-toggle="modal" href="#signout" class="btn btn-primary btn-md">Sign Out</a>
+        <button data-toggle="modal" href="#signout" class="btn btn-primary btn-mini">Sign Out</button>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->
+</div>
 </nav>

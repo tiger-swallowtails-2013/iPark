@@ -20,16 +20,22 @@
 #searchform {
   line-height: 3.7em;
 }
+*/
 
-.navbar {
-    height: 10px;
-}*/
+.nav-inner-container{
+  max-width: 1048px;
+  margin: 0 auto;
+}
 
 .nav-link {
   line-height: 2em !important;
 }
 .navbar-left {
   line-height: 3em;
+}
+
+.navbar-right {
+  line-height: 4em;
 }
 .navbar-brand {
   line-height: 10em;
@@ -91,27 +97,46 @@ html {
 }
 
 body {
-  height: 100%; margin: 0; padding: 0
+  height: 100%;
+  margin: 0;
+  padding: 0
 }
 
 
 .map_and_listings_container {
   margin: 0 auto;
   position: relative;
-  width: 100%;
+  width: 1048px;
+  min-width: 20em;
   height:600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
 }
 
 #map-canvas {
   height: 100%;
   width: 50%;
   float: left;
+  min-width: 20em;
+
+}
+
+h3#neighborhood {
+  margin-top: 0em;
+}
+
+.spot_id {
+  padding-left: 2em;
 }
 
 .listings-container {
   float: left;
-  width: 49%;
-  height: 100%;
+  width: 35%;
+  min-width: 18em;
+  height:600px;
+  margin-left: 5%;
+  overflow:auto;
 }
 
 .hidden {

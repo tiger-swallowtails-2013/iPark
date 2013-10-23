@@ -4,7 +4,7 @@
 
 
 function getMarkers(callback) {
-  $.get("spot/find")
+  $.get("search/spots")
   .done(function(data){
     callback(data)
   }).fail(function(){
@@ -90,6 +90,8 @@ function initializeMap() {
   if ($('#map-canvas').length > 0){
     iPark.makeMap()
     getMarkers(function(markers){
+      var searchView = new SearchView("Chinatown", markers);
+      searchView.render();
       iPark.makeMarkers(markers)
     })
   }
