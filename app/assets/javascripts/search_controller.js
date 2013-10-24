@@ -56,13 +56,23 @@ var SearchController = {
     }).done(function(neighborhood){
       var neighborhoodView = new NeighborhoodView(neighborhood);
       neighborhoodView.render()
+      var newLatLng = new google.maps.LatLng(37.7833,-122.4167);
+      iPark.map.setCenter(newLatLng);
+      iPark.map.setZoom(13);
     });
   }
 }
 
 function findSpotsFromSearchBar(e, ui) {
-  var userInput = $("#autocomplete").val();
-  SearchController.findSpots(e, ui, userInput)
+  if ( $("#autocomplete").val().length == 0 )
+    {
+      var userInput = "Chinatown"
+    }
+    else
+    {
+      var userInput = $("#autocomplete").val();
+    }
+      SearchController.findSpots(e, ui, userInput)
 }
 
 function onUserEnter() {

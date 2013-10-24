@@ -54,7 +54,7 @@ class SpotsController < ApplicationController
   def hood
     zip_code = params[:zip]
     results = CityData.find_by_zip_code(zip_code)
-    place = results.neighborhood.capitalize
+    place = results.neighborhood.titleize
     render json: place.to_json
   end
 end
