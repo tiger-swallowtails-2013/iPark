@@ -1,23 +1,9 @@
 <p id="profileGreeting">Hi, <%= current_user.username %>!</p>
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          <p>Spots You've Rented</p>
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse out">
-      <div class="panel-body">
-        <% current_user.rented_reservations.each do |reservation| %>
-          <%= render partial: "users/spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
 
+<p>Spots You've Rented</p>
+<%  current_user.rented_reservations.each do |reservation| %>
+  <%= render partial: "users/spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
+<% end %>
 
 <p>Spots You've Posted for Rent </p>
 <% current_user.spots.each do |spot| %>
