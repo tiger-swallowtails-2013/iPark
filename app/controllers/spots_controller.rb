@@ -43,6 +43,7 @@ class SpotsController < ApplicationController
 
   def search
     query = params[:q] || "94108"
+    # query.map! {|each_query| each_query.downcase }
     results = parse_search(query)
     # area = CityData.find_by_zip_code(results.first)
     render json: results.to_json

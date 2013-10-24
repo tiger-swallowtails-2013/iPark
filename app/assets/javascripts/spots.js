@@ -31,13 +31,27 @@ iPark.makeMap = function () {
 iPark.makeMarkers = function (markers) {
   var self = this
   $.each(markers, function(index, element) {
-      self.makeMarker(index, this.latitude, this.longitude, this.street, this.location_type, this.description, this.id )
+    var marker = self.makeMarker(index, element)
+    google.maps.event.addListener(marker, 'click', function () {
+      iPark.focusOnMarker(marker)
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function() {
+      iPark.infoWindow.setOptions({disableAutoPan : true })
+      iPark.infoWindow.open(iPark.map, marker)
+      var content =  'Address: '  + String(street) + ' parking type: ' + String(location) + ' '
+      var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
+      iPark.infoWindow.setContent(content + link)
+    });
+
+
   });
 }
 
-iPark.makeMarker = function (index, lat, long, street, location, description, spot_id ) {
-  var myLatlng = new google.maps.LatLng(lat, long)
-  var num = index + 1
+iPark.makeMarker = function (index, markerData) {
+  global = markerData
+  var myLatlng = new google.maps.LatLng(markerData.latitude, markerData.longitude)
+  var num = index
   var marker = new google.maps.Marker({
     position: myLatlng,
     title: 'Click to Zoom',
@@ -46,25 +60,15 @@ iPark.makeMarker = function (index, lat, long, street, location, description, sp
   marker.setMap(this.map);
   markersArray.push(marker);
 
-  google.maps.event.addListener(marker, 'click', function () {
-    iPark.focusOnMarker(marker)
-  });
+  return marker
+}
 
-  google.maps.event.addListener(marker, 'mouseover', function() {
-    iPark.infoWindow.setOptions({disableAutoPan : true })
-    iPark.infoWindow.open(iPark.map, marker)
-    var content =  'Address: '  + String(street) + ' parking type: ' + String(location) + ' '
-    var link = '<a href=/spots/' + spot_id + '>Reserve this Spot</a>'
-    iPark.infoWindow.setContent(content + link)
-  });
- }
+iPark.focusOnMarker = function(marker){
+  iPark.centerAndZoom(marker);
+  // also highlight selected div
+}
 
- iPark.focusOnMarker = function(){
-    iPark.centerAndZoom(marker);
-    // also highlight selected div
- }
-
- iPark.centerAndZoom = function(marker) {
+iPark.centerAndZoom = function(marker) {
   if(iPark.currentlyCenteredOn(marker) && iPark.map.getZoom() == 18){
     iPark.map.setZoom(13);
   }
@@ -72,16 +76,16 @@ iPark.makeMarker = function (index, lat, long, street, location, description, sp
     iPark.map.setCenter(marker.getPosition());
     iPark.map.setZoom(18);
   }
- }
+}
 
- iPark.currentlyCenteredOn = function(marker) {
-    if (iPark.map.getCenter() == marker.position){
-      return true
-    }
-    else{
-      return false
-    }
- }
+iPark.currentlyCenteredOn = function(marker) {
+  if (iPark.map.getCenter() == marker.position){
+    return true
+  }
+  else{
+    return false
+  }
+}
 
 iPark.clearMarkers = function() {
   for (var i = 0; i < markersArray.length; i++) {
@@ -93,10 +97,11 @@ iPark.clearMarkers = function() {
 function initializeMap() {
   if ($('#map-canvas').length > 0){
     iPark.makeMap()
-    getMarkers(function(markers){
-      var searchView = new SearchView("Chinatown", markers);
-      searchView.render();
-      iPark.makeMarkers(markers)
-    })
+    // getMarkers(function(markers){
+     $(".listing").removeClass("selected")
+     SearchController.findSpots(event, ui=0, "Chinatown" )
+    // var searchView = new SearchView("Chinatown", markers);
+    // searchView.render();
+    // iPark.makeMarkers(markers)
   }
 }
