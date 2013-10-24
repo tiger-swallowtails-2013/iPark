@@ -47,4 +47,10 @@ class SpotsController < ApplicationController
     render json: suggestions.to_json
   end
 
+  def hood
+    query = params[:q].to_i
+    results = CityData.find_by_zip_code(query)
+    results.map!{ |place| place.neighborhood }
+    render json: results.to_json
+  end
 end

@@ -1,4 +1,4 @@
-<p>Hi, <%= current_user.username %>!</p>
+<p id="profileGreeting">Hi, <%= current_user.username %>!</p>
 
 <p>Spots You've Rented</p>
 <%  current_user.rented_reservations.each do |reservation| %>

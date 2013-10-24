@@ -1,5 +1,4 @@
 
-
 var doOnLoad = function(){
   initializeMap()
   SearchController.setupAutocomplete()

@@ -4,7 +4,7 @@ var SearchController = {
     $("#autocomplete").autocomplete({
       source: SearchController.onUserKeystroke,
       minLength: 2,
-      select: SearchController.findSpots
+      select: findSpotsFromSearchBar
     });
   },
 
@@ -13,35 +13,57 @@ var SearchController = {
       url: "search/autocomplete",
       data: {q: request.term}
     }).done(function(data){
-      // response is a jQuery-UI function, apparently
       response(data)
     });
   },
 
-  findSpots: function(e, ui){
-     iPark.clearMarkers();
-    var userInput = $("#autocomplete").val();
+  findSpots: function(e, ui, searchterm){
+    e.preventDefault();
+    iPark.clearMarkers();
+
     $.ajax({
       url:"search/spots",
-      data: {q: userInput}
+      data: {q: searchterm}
     }).done(function(listings){
-      var searchView = new SearchView(userInput, listings);
-      searchView.render();
+      SearchController.buildAndAssociateMarkersAndList(searchterm, listings)
+    });
+  },
+  buildAndAssociateMarkersAndList:function(title, listings){
+    var newListing = new ListingsView()
+    $.each(listings, function(index, listing){
+      var num = index+1
+      var sideBarListing = newListing.addListing(num,listing)
+      var marker = iPark.makeMarker(num, listing)
+
+      function selectOnlyMe(){
+        $(".listing").removeClass("selected")
+        iPark.focusOnMarker(marker)
+        sideBarListing.select()
+      }
+
+      google.maps.event.addListener(marker, 'click', selectOnlyMe)
+      $(sideBarListing.$elem).on("click", selectOnlyMe)
+
+    })
+
+  },
+  updateNeighborhoodFromListing: function(listing) {
+    $.ajax({
+      url:"search/hood",
+      data: {q: listing.zip_code}
+    }).done(function(neighborhood){
+      var neighborhoodView = new NeighborhoodView(neighborhood);
+      neighborhoodView.render()
     });
   }
 }
 
-function onUserEnter() {
-  window.addEventListener('keypress', function (e) {
-    if (e.keyCode == 13) {
-    SearchController.findSpots(e)
-    }
-  }, false);
+function findSpotsFromSearchBar(e, ui) {
+  var userInput = $("#autocomplete").val();
+  SearchController.findSpots(e, ui, userInput)
 }
 
+function onUserEnter() {
+  $('.navbar-form').on("submit", findSpotsFromSearchBar)
+}
 
-
-
-// if valid zipcode send back listing based on zip code without converting to neighboorhood
-// if address send back listing that matches street!
-// populate autocomplete database library with potential zips/

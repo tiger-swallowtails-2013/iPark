@@ -1,31 +1,47 @@
 <%= form_for :spot, method: :post do |f| %>
-  <p>
-    <%= f.label :street %>
-    <%= f.text_field :street %>
-    <%= f.label :zip_code %>
-    <%= f.text_field :zip_code %>
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-    <%= f.label :location_type %>
-    <%= f.text_field :location_type %>
-  </p>
-  <p>Availability </p>
-  <p>
+  <div id="newSpotTop">
+    <div id="newSpotData">
+      <div class="newSpotFirst">
+        <p class="newSpotLabel">
+          <%= f.label :street %>
+        </p>
+        <%= f.text_field :street %>
+        <p class="newSpotLabel">
+          <%= f.label :zip_code %>
+        </p>
+        <%= f.text_field :zip_code %>
+      </div>
+      <div class="newSpotFirst">
+        <p class="newSpotLabel">
+          <%= f.label :price %>
+        </p>
+        <%= f.text_field :price %>
+        <p class="newSpotLabel">
+          <%= f.label :location_type %>
+        </p>
+        <%= f.text_field :location_type %>
+      </div>
+    </div>
+  </div>
+  <p class ="newSpotLine" id="newSpotDateHeading">Availability </p>
+  <p class="newSpotLine" id="newSpotDates1">
     Monday: <%= check_box_tag "spot[monday]"%>
     Tuesday: <%= check_box_tag "spot[tuesday]"%>
     Wednesday:  <%= check_box_tag "spot[wednesday]"%>
     Thursday:  <%= check_box_tag "spot[thursday]"%>
+   </p>
+  <p class="newSpotLine" id="newSpotDates2">
     Friday: <%= check_box_tag "spot[friday]"%>
     Saturday: <%= check_box_tag "spot[saturday]"%>
     Sunday: <%= check_box_tag "spot[sunday]"%>
   </p>
-  <p>Start Date</p>
-  <p>
+  <p class="newSpotLine" id="newSpotStart">Start Date</p>
+  <p class="newSpotLine newSpotDate">
     <%= date_select :startDate, :order => [:day, :month, :year]%>
   </p>
-  <p>End Date</p>
-  <p>
+  <p class="newSpotLine" id="newSpotEnd">End Date</p>
+  <p class="newSpotLine newSpotDate">
     <%= date_select :endDate, :order => [:day, :month, :year] %>
   </p>
-  <p><%= f.submit %></p>
+  <p class="newSpotLine" id="newSpotSubmit"><%= f.submit %></p>
 <% end %>

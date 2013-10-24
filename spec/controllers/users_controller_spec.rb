@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe UsersController do
-  describe "GET signup" do
-    it "shows a new user form" do
-      expect(get :new).to render_template :new
-    end
-  end
 
   describe "POST signup" do
     let(:new_user) { FactoryGirl.build(:user) }
@@ -26,7 +21,7 @@ describe UsersController do
       expect(User.count).to be(0)
     end
     it "renders correct page for invalid user" do
-      expect(post :create, :user => {username: new_user.username, password: nil, email: new_user.email}).to render_template :new
+      expect(post :create, :user => {username: new_user.username, password: nil, email: new_user.email}).to redirect_to spots_path
     end
   end
 
