@@ -65,7 +65,6 @@ iPark.makeMarker = function (index, markerData) {
 
 iPark.focusOnMarker = function(marker){
   iPark.centerAndZoom(marker);
-  // also highlight selected div
 }
 
 iPark.centerAndZoom = function(marker) {
@@ -97,11 +96,7 @@ iPark.clearMarkers = function() {
 function initializeMap() {
   if ($('#map-canvas').length > 0){
     iPark.makeMap()
-    // getMarkers(function(markers){
      $(".listing").removeClass("selected")
      SearchController.findSpots(event, ui=0, "Chinatown" )
-    // var searchView = new SearchView("Chinatown", markers);
-    // searchView.render();
-    // iPark.makeMarkers(markers)
   }
 }
