@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery.ui.autocomplete
 //= require turbolinks
+//= require bootstrap.min
+//= require jquery.datePicker
 //= require spots
 //= require search_views
 //= require search_controller
 //= require search
-//= require_tree .
+//= require zdate

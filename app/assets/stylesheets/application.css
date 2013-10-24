@@ -8,8 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap.min
+ *= require bootstrap-theme.min
+ *= require datePicker
+ *= require jquery-ui-1.10.3
  *= require_self
- *= require_tree .
  */
 
 
@@ -46,6 +49,9 @@
   height: 4em;
 }
 
+.navbar button {
+  margin-right: 1px;
+}
 
 h1 {
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
@@ -106,22 +112,16 @@ body {
   padding: 0
 }
 
-
-.map_and_listings_container {
-  margin: 0 auto;
-  position: relative;
-  width: 1048px;
-  min-width: 20em;
-  height:600px;
+.map-and-listings {
   margin-top: 2em;
+}
+
+.map-container {
+  height: 200px;
 }
 
 #map-canvas {
   height: 100%;
-  width: 50%;
-  float: left;
-  min-width: 20em;
-
 }
 
 h3#neighborhood {
@@ -133,26 +133,29 @@ h3#neighborhood {
 }
 
 .listings-container {
-  float: left;
-  width: 35%;
-  min-width: 18em;
-  margin-left: 5%;
-  height:600px;
-  background: lightyellow;
+  margin-top: 2em;
 }
+
 .listings {
   overflow:auto;
-  height:95%;
+}
+
+.selected {
+  background:blue;
 }
 
 .hidden {
   display:none;
 }
 
-.navbar button {
-  margin-right: 1px;
+@media screen and (min-width: 320px) {
+  .map-container {
+    height: 160px;
+  }
 }
 
-.selected {
-  background:blue;
+@media screen and (min-width: 481px) {
+  .map-container {
+    height: 480px;
+  }
 }
