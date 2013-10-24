@@ -8,7 +8,7 @@
     <% end %>
   <% end %>
 <% else %>
-  <p class="text-center"> No new notifications! </p>
+  <p id="no_notifications"> No new notifications! </p>
 <% end %>
 <%= button_to "Clear Notifications", {:controller=> "users", :action => "clear_notifications"}, {class: 'notification_clear'} %>
 </div>
