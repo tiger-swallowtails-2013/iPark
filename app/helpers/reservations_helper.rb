@@ -31,4 +31,8 @@ module ReservationsHelper
       dates.collect {|date| concat(content_tag(:p, date))}
     end
   end
+
+  def reserved?(reservation)
+    reservation.renter_id != nil
+  end
 end
