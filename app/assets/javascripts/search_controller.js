@@ -20,10 +20,10 @@ var SearchController = {
   findSpots: function(e, ui, searchterm){
     e.preventDefault();
     iPark.clearMarkers();
-
+    var date = $( "#datepicker" ).val()
     $.ajax({
       url:"search/spots",
-      data: {q: searchterm}
+      data: {q: searchterm, d: date}
     }).done(function(listings){
       SearchController.buildAndAssociateMarkersAndList(searchterm, listings)
     });

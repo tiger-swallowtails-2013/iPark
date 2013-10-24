@@ -17,7 +17,30 @@
       <div class="form-group">
         <input id="autocomplete" type="text" class="form-control" placeholder="Search">
       </div>
-      <button class="btn btn-primary btn-mini"><i class="icon-calendar"></i> Today</button>
+
+
+      <input class="hidden" type="text" id="datepicker"/><button class="btn btn-primary btn-mini calendar-trigger"><i class="icon-calendar"></i></button>
+  <script>
+  $(function() {
+    var $cal = $( "#datepicker" )
+    $cal.datepicker({
+      showOn: "both",
+      buttonImageOnly: false,
+      dateFormat: "yy-mm-dd",
+      onClose: function(date,obj) {
+        console.log(date)
+      }
+    });
+
+    $(".ui-datepicker-trigger").css('display','none')
+    $(".calendar-trigger").click(function(e){
+      $cal.datepicker('show');
+    })
+  });
+
+  </script>
+
+
     </form>
     <ul class="nav navbar-nav navbar-right">
 
