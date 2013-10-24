@@ -148,3 +148,7 @@ h3#neighborhood {
 .navbar button {
   margin-right: 1px;
 }
+
+.selected {
+  background:blue;
+}
