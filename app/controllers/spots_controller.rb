@@ -16,7 +16,7 @@ class SpotsController < ApplicationController
         create_reservations(@spot, params)
       end
     end
-    redirect_to spots_path 
+    redirect_to spots_path
   end
 
   def show
@@ -38,7 +38,7 @@ class SpotsController < ApplicationController
     results = parse_search(query)
     good_results = results.select{|spot| spot unless spot.reservations.where(date: date, renter_id: nil)[0].nil?}
     if good_results.empty?
-      redirect_to spots_path # this may cause an infinite loop if there are no spots in default location (c-town) on default date (today)
+      render json: last_five_newest_available_spots.to_json
     else
       render json: good_results.to_json
     end
