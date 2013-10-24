@@ -1,7 +1,6 @@
 var SearchController = {
   setupAutocomplete: function() {
     onUserEnter()
-    // onUserMouseCLick()
     $("#autocomplete").autocomplete({
       source: SearchController.onUserKeystroke,
       minLength: 2,
@@ -22,7 +21,7 @@ var SearchController = {
   findSpots: function(e, ui, searchterm){
     e.preventDefault();
     iPark.clearMarkers();
-    // var userInput = $("#autocomplete").val();
+
     $.ajax({
       url:"search/spots",
       data: {q: searchterm}
@@ -75,14 +74,7 @@ function findSpotsFromSearchBar(e, ui) {
 }
 
 function onUserEnter() {
-  // When the user mouses down on a neighborhood OR clicks enter, the autocomplete selects it
-  // Currently this only works on enter.
-
-
-
   $('.navbar-form').on("submit", findSpotsFromSearchBar)
-
-  //  window.addEventListener('keypress', function (e, ui) {
 }
 
 // function onUserMouseCLick() {
