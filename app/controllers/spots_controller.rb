@@ -36,7 +36,9 @@ class SpotsController < ApplicationController
 
   def search
     query = params[:q] || "94108"
+    date = (params[:d].empty? ? Date.today.strftime("%Y\-%m\-%d") : params[:d])
     results = parse_search(query)
+    results.map!{|spot| spot.reservations.where(date: date)}
     render json: results.to_json
   end
 
