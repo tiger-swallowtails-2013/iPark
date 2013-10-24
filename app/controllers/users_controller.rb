@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params.require(:user).permit(:username, :password, :email, :password_confirmation))
     if @user.save
+      log_in(@user)
       redirect_to spots_path
     else
       redirect_to spots_path
