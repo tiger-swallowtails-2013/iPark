@@ -14,12 +14,9 @@ class SpotsController < ApplicationController
       if @spot.save
         current_user.spots << @spot
         create_reservations(@spot, params)
-        redirect_to spots_path and return
-      else
-        redirect_to spots_path and return
       end
     end
-    redirect_to spots_path and return
+    redirect_to spots_path 
   end
 
   def show
