@@ -1,17 +1,14 @@
-<div id="notification-head">
-  <p>Notifications</p>
-    <div id="notifications-list">
-    <% if user_notification? %>
-      <% current_user.reservations.each do |reservation|%>
-        <% if reservation_notification?(reservation) %>
-          <% spot = find_spot(reservation) %>
-          <p><%= spot.street.to_s %>, <%= spot.zip_code %></p>
-          <p><%= reservation.date %>, Rented By: <%= rented_by(reservation) %></p>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p> No new notifications! </p>
+<div id="notifications-list">
+<% if user_notification? %>
+  <% current_user.reservations.each do |reservation|%>
+    <% if reservation_notification?(reservation) %>
+      <% spot = find_spot(reservation) %>
+      <p><%= spot.street.to_s %>, <%= spot.zip_code %></p>
+      <p><%= reservation.date %>, Rented By: <%= rented_by(reservation) %></p>
     <% end %>
-    <%= button_to "Clear Notifications", :controller=> "users", :action => "clear_notifications" %>
-    </div>
+  <% end %>
+<% else %>
+  <p id="no_notifications"> No new notifications! </p>
+<% end %>
+<%= button_to "Clear Notifications", {:controller=> "users", :action => "clear_notifications"}, {class: 'notification_clear'} %>
 </div>

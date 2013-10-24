@@ -1,0 +1,16 @@
+.modal-notification-content{
+  max-width: 294px;
+  margin-left: 26%;
+}
+
+#notifications-list{
+  margin-left:38px;
+}
+
+.notification_clear{
+  margin-left:17px;
+}
+
+#no_notifications{
+  margin-left: 11px;
+}

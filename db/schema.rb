@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20131022183037) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "date"
-    t.string   "renter_id"
+    t.integer  "renter_id"
     t.boolean  "notification", default: false
   end
 

@@ -11,6 +11,9 @@
  *= require bootstrap.min
  *= require bootstrap-theme.min
  *= require datePicker
+ *= require listSpot
+ *= require notifications
+ *= require profile
  *= require jquery-ui-1.10.3
  *= require_self
  */
@@ -59,7 +62,7 @@ h1 {
     line-height: 65px;
 }
 
-p {
+p, h4 {
     font-family: 'Vollkorn', Georgia, Times, serif;
     font-size: 16px;
     line-height: 25px;
