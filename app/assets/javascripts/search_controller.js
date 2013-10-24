@@ -20,10 +20,10 @@ var SearchController = {
   findSpots: function(e, ui, searchterm){
     e.preventDefault();
     iPark.clearMarkers();
-
+    var date = $('#searchdate').val()
     $.ajax({
       url:"search/spots",
-      data: {q: searchterm}
+      data: {q: searchterm, d: date}
     }).done(function(listings){
       SearchController.buildAndAssociateMarkersAndList(searchterm, listings)
        if (listings.length > 0) SearchController.updateNeighborhoodFromListing(listings[0]);
