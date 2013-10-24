@@ -16,6 +16,8 @@
 <%= render partial: "layouts/navbar" %>
 <%= render partial: "layouts/buttons" %>
 <%= yield %>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&?key=AIzaSyBkNY97z54PKxfPfnGI4XS8S0wM_cnkpY8&sensor=false"></script>
+<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 </body>
 </html>
 
