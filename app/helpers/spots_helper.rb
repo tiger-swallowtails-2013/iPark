@@ -67,7 +67,7 @@ module SpotsHelper
     "#{heading.join(" ")}"
   end
 
-  def reserved(reservation)
+  def reserved?(reservation)
     reservation.renter_id != nil
   end
 end
