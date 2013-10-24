@@ -35,4 +35,16 @@ module ReservationsHelper
   def reserved?(reservation)
     reservation.renter_id != nil
   end
+
+  def reservation_notification?(reservation)
+     reservation.notification == true
+  end
+
+  def find_spot(reservation)
+    spot = Spot.find(reservation.spot_id)
+  end
+
+  def rented_by(reservation)
+    User.find(reservation.renter_id).username
+  end
 end
