@@ -4,7 +4,8 @@
   <p>
     <% spot.reservations.each do |reservation| %>
       <% if !(reserved?(reservation)) %>
-        <p id="<%= reservation.id %>" class="reservation"><%= reservation.date.to_date.inspect %> <%= link_to "Reserve", {:controller => "reservations", :action => "update", :id => reservation.id}, {:method => :put, :class => "linkReserve"} %>
+        <p id="<%= reservation.id %>" class="reservation">
+          <%= reservation.date.to_date.inspect %> <%= link_to "Reserve", {:controller => "reservations", :action => "update", :id => reservation.id}, {:method => :put, :class => "linkReserve"} %>
         </p>
 
   </p>
