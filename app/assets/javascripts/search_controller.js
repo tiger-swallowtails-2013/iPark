@@ -13,7 +13,6 @@ var SearchController = {
       url: "search/autocomplete",
       data: {q: request.term}
     }).done(function(data){
-      // response is a jQuery-UI function, apparently
       response(data)
     });
   },
@@ -26,17 +25,10 @@ var SearchController = {
       url:"search/spots",
       data: {q: searchterm}
     }).done(function(listings){
-      // if there are listings:
-      // - make an AJAX call with first listing zipcode to get neighborhood
-      // - move three lines below into the .done() of the 2nd ajax call
-      // - stop passing userInput and instead pass the neighborhood name from the
-      //   second ajax call
       SearchController.buildAndAssociateMarkersAndList(searchterm, listings)
     });
   },
   buildAndAssociateMarkersAndList:function(title, listings){
-    // var searchView = new SearchView(title, listings);
-    // searchView.render();
     var newListing = new ListingsView()
     $.each(listings, function(index, listing){
       var num = index+1
@@ -60,7 +52,6 @@ var SearchController = {
       url:"search/hood",
       data: {q: listing.zip_code}
     }).done(function(neighborhood){
-      console.log(neighborhood)
       var neighborhoodView = new NeighborhoodView(neighborhood);
       neighborhoodView.render()
     });
@@ -77,15 +68,3 @@ function onUserEnter() {
   $('.navbar-form').on("submit", findSpotsFromSearchBar)
 }
 
-// function onUserMouseCLick() {
-//   window.addEventListener('click', function (e) {
-//     SearchController.findSpots(e)
-//   })
-// }
-
-
-
-
-// if valid zipcode send back listing based on zip code without converting to neighboorhood
-// if address send back listing that matches street!
-// populate autocomplete database library with potential zips/
