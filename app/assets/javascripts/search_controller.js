@@ -52,7 +52,7 @@ var SearchController = {
   updateNeighborhoodFromListing: function(listing) {
     $.ajax({
       url:"search/hood",
-      data: {q: listing.zip_code}
+      data: {zip: listing.zip_code}
     }).done(function(neighborhood){
       var neighborhoodView = new NeighborhoodView(neighborhood);
       neighborhoodView.render()

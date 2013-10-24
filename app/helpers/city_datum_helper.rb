@@ -7,17 +7,23 @@
     elsif user_input =~ /\d+\w?\s\D*/
       find_by_address(user_input)
     else
-      "error parsing search input"
+      last_five_newest_available_spots
     end
   end
 
   def find_by_zip(input)
-    return Spot.where(zip_code: input)
+    Spot.where(zip_code: input)
   end
 
   def find_by_hood(input)
-    zip = CityData.where(neighborhood: input.downcase).select(:zip_code)
-    find_by_zip(zip)
+    query = input.downcase
+    suggestions = CityData.where('neighborhood LIKE ?', "%#{query}%").select(:zip_code)
+    arbitrary_zip = suggestions[0].zip_code unless suggestions[0].nil?
+    if arbitrary_zip
+      find_by_zip(arbitrary_zip)
+    else
+      last_five_newest_available_spots
+    end
   end
 
   def find_by_address(input)
@@ -29,5 +35,10 @@
   def parse_json_for_zip(json_results)
     json_results.each{|x| return x.postal_code if x.postal_code[0,2] == "94"}
   end
+
+  def last_five_newest_available_spots
+    Spot.last(5).select{|spot| spot unless spot.reservations.where(renter_id: nil)[0].nil?}
+  end
+
 
 end
