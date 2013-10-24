@@ -56,6 +56,7 @@ var SearchController = {
     }).done(function(neighborhood){
       var neighborhoodView = new NeighborhoodView(neighborhood);
       neighborhoodView.render()
+      iPark.map.setZoom(13);
     });
   }
 }
