@@ -1,12 +1,24 @@
-<p id="profileGreeting">Hi, <%= current_user.username %>!</p>
+<div id="profilePage">
+  <p id="profileGreeting">Hi, <%= current_user.username %>!</p>
+  <p><b>Spots You've Rented</b></p>
+  <hr>
+    <% if current_user.rented_reservations.empty? %>
+      <p>None.</p>
+    <% else %>
+      <%current_user.rented_reservations.each do |reservation| %>
+        <%= render partial: "users/spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
+      <% end %>
+    <% end %>
+  </p>
 
-<p>Spots You've Rented</p>
-<%  current_user.rented_reservations.each do |reservation| %>
-  <%= render partial: "users/spot", locals: { spot: reservation.spot, reservations: [reservation] } %>
-<% end %>
-
-<p>Spots You've Posted for Rent </p>
-<% current_user.spots.each do |spot| %>
-  <%= render partial: "users/spot", locals: { spot: spot, reservations: spot.reservations } %>
-<% end %>
+  <p><b>Spots You've Posted for Rent </p></b>
+  <hr>
+    <% if current_user.rented_reservations.empty? %>
+      <p>None.</p>
+    <% else %>
+      <% current_user.spots.each do |spot| %>
+        <%= render partial: "users/spot", locals: { spot: spot, reservations: spot.reservations } %>
+    <% end %>
+  <% end %>
+</div>
 
