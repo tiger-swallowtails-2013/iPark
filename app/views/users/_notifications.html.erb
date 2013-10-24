@@ -1,12 +1,12 @@
 <div id="notification-head">
   <p>Notifications</p>
     <div id="notifications-list">
-    <% if current_user.notification == true %>
+    <% if user_notification? %>
       <% current_user.reservations.each do |reservation|%>
-        <% if reservation.notification == true %>
-          <% spot = Spot.find(reservation.spot_id) %>
+        <% if reservation_notification?(reservation) %>
+          <% spot = find_spot(reservation) %>
           <p><%= spot.street.to_s %>, <%= spot.zip_code %></p>
-          <p><%= reservation.date %>, Rented By: <%= User.find(reservation.renter_id).username %></p>
+          <p><%= reservation.date %>, Rented By: <%= rented_by(reservation) %></p>
         <% end %>
       <% end %>
     <% else %>
