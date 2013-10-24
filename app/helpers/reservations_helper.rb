@@ -22,4 +22,29 @@ module ReservationsHelper
       @spot.reservations << reservation
     end
   end
+
+  def show_current_dates(reservations)
+    dates = reservations.map do |reservation|
+      reservation.date.to_date.inspect
+    end
+    content_tag :ul do
+      dates.collect {|date| concat(content_tag(:p, date))}
+    end
+  end
+
+  def reserved?(reservation)
+    reservation.renter_id != nil
+  end
+
+  def reservation_notification?(reservation)
+     reservation.notification == true
+  end
+
+  def find_spot(reservation)
+    spot = Spot.find(reservation.spot_id)
+  end
+
+  def rented_by(reservation)
+    User.find(reservation.renter_id).username
+  end
 end

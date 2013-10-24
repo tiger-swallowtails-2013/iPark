@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       log_in(@user)
       redirect_to spots_path
     else
-      render :new
+      redirect_to spots_path
     end
   end
 

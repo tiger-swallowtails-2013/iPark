@@ -59,4 +59,11 @@ module SpotsHelper
       end
     end
   end
+
+  #view helpers
+
+  def spot_heading(spot)
+    heading = spot.street, spot.zip_code
+    "#{heading.join(" ")}"
+  end
 end

@@ -1,19 +1,8 @@
 <h1> Current Dates </h1>
-<% @reservations.each do |reservation| %>
-  <p><%= reservation.date.to_date.inspect %></p>
-<% end %>
+<%= show_current_dates(@reservations) %>
 <button id="addReservation">
   Add Reservation
 </button>
 
-<form action="/reservations" method="post" name="chooseDateForm" id="chooseDateForm" action="#" class="hidden">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
-  <input type="hidden" name="dates">
-  <input type="hidden" name="spot_id" value="<%= @spot.id %>">
-  <p>
-    <input name="date1" id="date1" class="date-pick hidden">
-  </p>
-  <p><input type="submit" value="Submit"></p>
-</form>
-
+<%= render partial: "newReservation" %>
 

@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe SessionsController do
 let!(:new_user) { FactoryGirl.create(:user) }
-  describe "GET new" do
-    it "renders log in screen" do
-      get :new
-      expect(response).to render_template :new
-    end
-  end
 
   describe "POST create" do
     it "creates a new session" do

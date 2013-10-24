@@ -17,7 +17,7 @@ class ReservationsController < ApplicationController
   def destroy
     reservation = Reservation.find(params[:id])
     reservation.destroy
-    redirect_to user_path(current_user)
+    redirect_to spots_path
   end
 
   def new
@@ -29,12 +29,5 @@ class ReservationsController < ApplicationController
     @spot = Spot.find(params[:spot_id])
     dates = create_reservations_with_date_objects(params)
     redirect_to new_reservation_path(spot_id: @spot.id)
-  end
-
-  def clear_notifications
-    current_user.update_attribute(:notification, false)
-    active_reservations = Reservation.where(notification: true)
-    active_reservations.each {|reservation| reservation.update_attribute(:notification, false)}
-    redirect_to spots_path
   end
 end
