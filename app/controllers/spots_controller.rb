@@ -38,8 +38,12 @@ class SpotsController < ApplicationController
     query = params[:q] || "94108"
     date = (params[:d].empty? ? Date.today.strftime("%Y\-%m\-%d") : params[:d])
     results = parse_search(query)
-    results.map!{|spot| spot.reservations.where(date: date)}
-    render json: results.to_json
+    good_results = results.select{|spot| spot unless spot.reservations.where(date: date, renter_id: nil)[0].nil?}
+    if good_results.empty?
+      redirect_to spots_path # this may cause an infinite loop if there are no spots in default location (c-town) on default date (today)
+    else
+      render json: good_results.to_json
+    end
   end
 
   def autocomplete
