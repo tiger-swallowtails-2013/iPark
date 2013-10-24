@@ -12,6 +12,7 @@
  *= require bootstrap-theme.min
  *= require datePicker
  *= require listSpot
+ *= require notifications
  *= require profile
  *= require jquery-ui-1.10.3
  *= require_self
