@@ -60,7 +60,6 @@ var SearchController = {
 
 function findSpotsFromSearchBar(e, ui) {
   var userInput = $("#autocomplete").val();
-  console.log(e)
   SearchController.findSpots(e, ui, userInput)
 }
 
