@@ -30,11 +30,4 @@ class ReservationsController < ApplicationController
     dates = create_reservations_with_date_objects(params)
     redirect_to new_reservation_path(spot_id: @spot.id)
   end
-
-  def clear_notifications
-    current_user.update_attribute(:notification, false)
-    active_reservations = Reservation.where(notification: true)
-    active_reservations.each {|reservation| reservation.update_attribute(:notification, false)}
-    redirect_to spots_path
-  end
 end

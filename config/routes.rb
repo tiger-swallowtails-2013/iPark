@@ -6,7 +6,7 @@ IPark::Application.routes.draw do
 
   get "search/spots" => "spots#search"
   get "search/autocomplete" => "spots#autocomplete"
-  post "reservations/clear_notifications" => "reservations#clear_notifications"
+  post "users/clear_notifications" => "users#clear_notifications"
 
   get "signup" => "users#new", :as => :new_user
   post "signup" => "users#create", :as => :signup_user
