@@ -61,7 +61,7 @@ h1 {
     line-height: 65px;
 }
 
-p {
+p, h4 {
     font-family: 'Vollkorn', Georgia, Times, serif;
     font-size: 16px;
     line-height: 25px;
