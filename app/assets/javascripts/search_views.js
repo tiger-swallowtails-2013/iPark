@@ -23,31 +23,25 @@ NeighborhoodView.prototype.render = function() {
 
 var ListingsView = function(listings) {
   this.$elem = $('.listings');
-  this.listings = listings;
+  this.$elem.empty()
 }
 
-ListingsView.prototype.render = function() {
-  this.$elem.html("");
-  var self = this;
-  $.each(this.listings, function(i, listing) {
-    var listingView = new ListingView(i+1, listing);
-    self.$elem.append(listingView.render());
-  });
 
-  iPark.makeMarkers(this.listings)
-
-  return this.$elem;
+ListingsView.prototype.addListing = function(number, listing){
+  var listingView = new ListingView(number, listing);
+  this.$elem.append(listingView.render());
+  return listingView
 }
+
 
 var ListingView = function(index, listing) {
-  // LISTING MODEL RETURNED FROM BACKEND HAS
-  // - id
-  // - index
-  // - street
-  // - price
   this.$elem = $('.hidden .listing').clone();
   this.index = index;
   this.listing = listing;
+}
+
+ListingView.prototype.select = function() {
+  this.$elem.addClass("selected")
 }
 
 ListingView.prototype.render = function() {
@@ -55,6 +49,5 @@ ListingView.prototype.render = function() {
   this.$elem.find('.street').text(this.listing.street);
   this.$elem.find('.price').text("$" + this.listing.price);
   this.$elem.find('a.spot_id').attr("href", "/spots/" + this.listing.id);
-
   return this.$elem;
 }
