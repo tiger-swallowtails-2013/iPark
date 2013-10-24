@@ -24,21 +24,8 @@ NeighborhoodView.prototype.render = function() {
 var ListingsView = function(listings) {
   this.$elem = $('.listings');
   this.$elem.empty()
-  // this.listings = listings;
 }
 
-// ListingsView.prototype.render = function() {
-//   this.$elem.html("");
-//   var self = this;
-//   $.each(this.listings, function(i, listing) {
-//     i += 1
-//     self.addListing(i, listing)
-//   });
-
-//   iPark.makeMarkers(this.listings)
-
-//   return this.$elem;
-// }
 
 ListingsView.prototype.addListing = function(number, listing){
   var listingView = new ListingView(number, listing);
@@ -48,11 +35,6 @@ ListingsView.prototype.addListing = function(number, listing){
 
 
 var ListingView = function(index, listing) {
-  // LISTING MODEL RETURNED FROM BACKEND HAS
-  // - id
-  // - index
-  // - street
-  // - price
   this.$elem = $('.hidden .listing').clone();
   this.index = index;
   this.listing = listing;
