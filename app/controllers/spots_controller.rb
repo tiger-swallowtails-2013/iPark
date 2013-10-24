@@ -46,9 +46,9 @@ class SpotsController < ApplicationController
   end
 
   def hood
-    query = params[:q].to_i
+    query = params[:q]
     results = CityData.find_by_zip_code(query)
-    results.map!{ |place| place.neighborhood }
-    render json: results.to_json
+    place = results.neighborhood.capitalize
+    render json: place.to_json
   end
 end

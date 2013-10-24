@@ -26,6 +26,7 @@ var SearchController = {
       data: {q: searchterm}
     }).done(function(listings){
       SearchController.buildAndAssociateMarkersAndList(searchterm, listings)
+       if (listings.length > 0) SearchController.updateNeighborhoodFromListing(listings[0]);
     });
   },
   buildAndAssociateMarkersAndList:function(title, listings){
@@ -34,7 +35,8 @@ var SearchController = {
       var num = index+1
       var sideBarListing = newListing.addListing(num,listing)
       var marker = iPark.makeMarker(num, listing)
-
+      var neighborhoodView = new NeighborhoodView(title)
+      neighborhoodView.render()
       function selectOnlyMe(){
         $(".listing").removeClass("selected")
         iPark.focusOnMarker(marker)
