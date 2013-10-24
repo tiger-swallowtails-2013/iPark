@@ -1,8 +1,13 @@
 <%= form_for :sessions, url: login_session_url do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <p><%= f.submit 'Sign In' %></p>
+  <div class="form-group">
+    <%= f.label :username, :class => "username" %>
+    <%= f.text_field :username %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <%= f.submit 'Sign In', :class => "btn btn-primary btn-large  " %>
 <% end %>
+<br>
 <p>Not a user? <%= link_to "Sign up!", new_user_path %> </p>
