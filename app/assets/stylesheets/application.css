@@ -144,7 +144,7 @@ h3#neighborhood {
 }
 
 .selected {
-  background:blue;
+  background:rgb(255, 248, 168);
 }
 
 .hidden {

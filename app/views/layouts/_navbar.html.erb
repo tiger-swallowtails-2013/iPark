@@ -14,11 +14,13 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <form class="navbar-form navbar-left" role="search">
-      <div class="form-group">
-        <input id="autocomplete" type="text" class="form-control" placeholder="Search">
+      <div class="form-group search">
+        <input id="autocomplete" type="text" class="form-group" placeholder="Search" autofocus>
+        <input id="searchdate" type="date" class="datepicker"></form>
       </div>
-      <button class="btn btn-primary btn-mini"><i class="icon-calendar"></i> Today</button>
     </form>
+
+
     <ul class="nav navbar-nav navbar-right">
 
       <% if current_user %>
