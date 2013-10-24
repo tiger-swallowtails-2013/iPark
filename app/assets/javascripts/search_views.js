@@ -17,7 +17,7 @@ var NeighborhoodView = function(name) {
 }
 
 NeighborhoodView.prototype.render = function() {
-  this.$elem.html(this.name);
+  this.$elem.hide().html(this.name).fadeIn(500)
 }
 
 
