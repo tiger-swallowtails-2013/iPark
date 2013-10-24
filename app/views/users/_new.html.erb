@@ -1,11 +1,29 @@
-<%= form_for :user, url: new_user_path do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+<form class="form-horizontal" role="form">
+
+<%= form_for :user, url: new_user_path, class: "form-horizontal", role: "form" do |f| %>
+  <div class="form-group">
+    <%= f.label :username, class: "col-lg-2 control-label" %>
+    <div class="col-lg-4">
+      <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: "col-lg-2 control-label" %>
+    <div class="col-lg-4">
+      <%= f.text_field :email, class: "form-control", placeholder: "Enter Email" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :password, class: "col-lg-2 control-label" %>
+    <div class="col-lg-4">
+      <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation, class: "col-lg-2 control-label" %>
+    <div class="col-lg-4">
+      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password" %>
+    </div>
+  </div>
   <p><%= f.submit %></p>
 <% end %>
