@@ -64,8 +64,15 @@ var SearchController = {
 }
 
 function findSpotsFromSearchBar(e, ui) {
-  var userInput = $("#autocomplete").val();
-  SearchController.findSpots(e, ui, userInput)
+  if ( $("#autocomplete").val().length == 0 )
+    {
+      var userInput = "Chinatown"
+    }
+    else
+    {
+      var userInput = $("#autocomplete").val();
+    }
+      SearchController.findSpots(e, ui, userInput)
 }
 
 function onUserEnter() {
