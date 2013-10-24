@@ -6,9 +6,9 @@
   <% if reservation.renter.present? %>
     <p> Reserved By: <%= reservation.renter.username %> </p>
   <% else %>
-    <%= link_to "Delete", { :controller => "reservations",
+    <p><%= link_to "Delete", { :controller => "reservations",
                           :action => "destroy",
                           :id => reservation.id},
-                          { :method => :delete } %>
+                          { :method => :delete } %></p>
   <% end %>
 <% end %>
