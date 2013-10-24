@@ -59,4 +59,15 @@ module SpotsHelper
       end
     end
   end
+
+  #view helpers
+
+  def spot_heading(spot)
+    heading = spot.street, spot.zip_code
+    "#{heading.join(" ")}"
+  end
+
+  def reserved(reservation)
+    reservation.renter_id != nil
+  end
 end

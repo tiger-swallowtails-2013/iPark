@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
   include SpotsHelper
   include CityDatumHelper
+  include ReservationsHelper
 
   def new
     @spot = Spot.new

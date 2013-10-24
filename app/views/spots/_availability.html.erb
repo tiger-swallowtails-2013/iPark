@@ -1,9 +1,9 @@
 <div class="reservation_list" id="<%=spot.id%>">
-  <p><%= spot.street %>, <%= spot.zip_code%></p>
+  <p><%= spot_heading(spot) %></p>
   <p>Availability:</p>
   <p>
     <% spot.reservations.each do |reservation| %>
-      <% if reservation.renter_id == nil %>
+      <% if !(reserved(reservation)) %>
         <p id="<%= reservation.id %>" class="reservation"><%= reservation.date.to_date.inspect %> <%= link_to "Reserve", {:controller => "reservations", :action => "update", :id => reservation.id}, {:method => :put, :class => "linkReserve"} %>
         </p>
 
