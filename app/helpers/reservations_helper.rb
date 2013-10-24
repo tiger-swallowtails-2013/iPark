@@ -22,4 +22,13 @@ module ReservationsHelper
       @spot.reservations << reservation
     end
   end
+
+  def show_current_dates(reservations)
+    dates = reservations.map do |reservation|
+      reservation.date.to_date.inspect
+    end
+    content_tag :ul do
+      dates.collect {|date| concat(content_tag(:p, date))}
+    end
+  end
 end

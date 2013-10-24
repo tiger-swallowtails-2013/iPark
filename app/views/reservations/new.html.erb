@@ -1,7 +1,5 @@
 <h1> Current Dates </h1>
-<% @reservations.each do |reservation| %>
-  <p><%= reservation.date.to_date.inspect %></p>
-<% end %>
+<%= show_current_dates(@reservations) %>
 <button id="addReservation">
   Add Reservation
 </button>
