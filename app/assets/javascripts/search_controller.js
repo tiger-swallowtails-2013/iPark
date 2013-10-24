@@ -68,14 +68,21 @@ var SearchController = {
   }
 }
 
+function findSpotsFromSearchBar(e, ui) {
+  var userInput = $("#autocomplete").val();
+  console.log(e)
+  SearchController.findSpots(e, ui, userInput)
+}
+
 function onUserEnter() {
   // When the user mouses down on a neighborhood OR clicks enter, the autocomplete selects it
   // Currently this only works on enter.
-  window.addEventListener('keypress', function (e) {
-    if (e.keyCode == 13) {
-    SearchController.findSpots(e)
-    }
-  }, false);
+
+
+
+  $('.navbar-form').on("submit", findSpotsFromSearchBar)
+
+  //  window.addEventListener('keypress', function (e, ui) {
 }
 
 // function onUserMouseCLick() {
