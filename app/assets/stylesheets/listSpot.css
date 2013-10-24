@@ -1,0 +1,53 @@
+.newSpotLabel{
+  margin-bottom: 0px;
+}
+
+#newSpotTop{
+}
+
+.newSpotData{
+  margin: 0 auto;
+  width: 100%;
+}
+
+.newSpotFirst{
+  width: 41%;
+  float: left;
+  padding: 5px;
+  margin-bottom: 6px;
+  width: 194px;
+  margin-left: 56px;
+}
+.newSpotLine {
+  width: 180px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+#newSpotDates1 {
+  width: 364px;
+}
+
+#newSpotSubmit{
+  width:123px;
+}
+
+#newSpotDates2 {
+  width:235px;
+}
+
+#newSpotDateHeading{
+  width:101px;
+}
+
+#newSpotEnd{
+  width:101px;
+}
+
+#newSpotStart{
+  width:101px;
+}
+
+.newSpotDate{
+  width: 240px;
+}
