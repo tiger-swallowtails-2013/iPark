@@ -17,7 +17,7 @@ class ReservationsController < ApplicationController
   def destroy
     reservation = Reservation.find(params[:id])
     reservation.destroy
-    redirect_to user_path(current_user)
+    redirect_to spots_path
   end
 
   def new
