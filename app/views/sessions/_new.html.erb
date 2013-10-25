@@ -1,4 +1,4 @@
-<%= form_for :sessions, url: login_session_url do |f| %>
+<%= form_for :sessions, :url => url_for(:controller => 'sessions', :action => 'create', method: :post) do |f| %>
   <div class="form-group">
     <%= f.label :username, :class => "username" %>
     <%= f.text_field :username %>
