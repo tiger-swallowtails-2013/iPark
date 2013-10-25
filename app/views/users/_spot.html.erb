@@ -1,6 +1,6 @@
 <p><%= spot.street %>, <%= spot.zip_code %></p>
 <p>Price: <%= spot.price %></p>
-<% if spot.user_id != current_user.id %>
+<% if spot.user_id = current_user.id %>
   <p><%= link_to "Add More Dates", {controller: "reservations", action: "new", spot_id: spot} %></p>
 <% end %>
 <% reservations.each do |reservation| %>
