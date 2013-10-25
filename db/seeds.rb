@@ -8,9 +8,10 @@ require_relative "./seed_helper"
 # - Make sure to adjust magic numbers before seeding the databse
 # - Comment out Geocoder validations in Spot Model
 CREATE_FAKE_USERS = true
-  FAKE_USERS_COUNT = 5
-  FAKE_SPOTS_COUNT = 20 # limit 2,500 requests per day
+  FAKE_USERS_COUNT = 10
+  FAKE_SPOTS_COUNT = 300 # limit 2,500 requests per day
   GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
+CREATE_RESERVATIONS = true
 CREATE_TEST_ACCOUNTS = false
 SEED_CITY_DATABASE = true
 
@@ -26,6 +27,7 @@ if CREATE_FAKE_USERS
       password: "foobar",
       password_confirmation: "foobar"
     )
+    spot.save ? (print ".") : (print "x")
   end
 
   puts "\n----Creating & Assigning Spots-----"
@@ -36,9 +38,30 @@ if CREATE_FAKE_USERS
   FAKE_SPOTS_COUNT.times do
     spot = Spot.new(generate_fake_spot_with_real_data)
     spot.save ? (print ".") : (print "x")
-    sleep GOOGLE_QUERY_SLEEPTIME
+    # sleep GOOGLE_QUERY_SLEEPTIME
   end
 end
+
+
+if CREATE_RESERVATIONS
+  puts "\n----Creating Reservations-----"
+
+  Spot.all.each do |spot|
+      current_user =  VALID_USER_IDS.sample
+      start_date = spot.start_date
+      end_date = spot.end_date
+      date_array = (start_date..end_date).to_a
+
+      date_array.each do |date|
+        reservation = Reservation.create(date: date)
+        spot.reservations << reservation
+        current_user.reservations << reservation
+      end
+      print "."
+  end
+
+end
+
 
 if CREATE_TEST_ACCOUNTS
   puts "\n----Creating Test Accounts-----"

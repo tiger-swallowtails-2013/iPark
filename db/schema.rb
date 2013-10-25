@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022183037) do
+ActiveRecord::Schema.define(version: 20131025020218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20131022183037) do
     t.boolean  "notification", default: false
   end
 
+  add_index "reservations", ["date"], name: "index_reservations_on_date", using: :btree
+
   create_table "spots", force: true do |t|
     t.integer  "user_id"
     t.integer  "price"
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 20131022183037) do
     t.text     "start_date"
     t.text     "end_date"
   end
+
+  add_index "spots", ["zip_code"], name: "index_spots_on_zip_code", using: :btree
 
   create_table "users", force: true do |t|
     t.integer  "spot_id"
