@@ -47,7 +47,7 @@ if CREATE_RESERVATIONS
   puts "\n----Creating Reservations-----"
 
   Spot.all.each do |spot|
-      current_user =  VALID_USER_IDS.sample
+      current_user = User.find_by_id(VALID_USER_IDS.sample)
       start_date = spot.start_date
       end_date = spot.end_date
       date_array = (start_date..end_date).to_a
