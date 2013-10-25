@@ -44,8 +44,8 @@ def generate_fake_spot_with_real_data
 end
 
 def make_fake_dates
-  start_date = Date.today + rand(1..30)
-  end_date = start_date + rand(1..30)
+  start_date = Date.today + rand(1..20)
+  end_date = start_date + rand(1..20)
   {start_date: format_date(start_date), end_date: format_date(end_date)}
 end
 

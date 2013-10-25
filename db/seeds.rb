@@ -9,9 +9,9 @@ require_relative "./seed_helper"
 # - Comment out Geocoder validations in Spot Model
 CREATE_FAKE_USERS = true
   FAKE_USERS_COUNT = 10
-  FAKE_SPOTS_COUNT = 300 # limit 2,500 requests per day
+  FAKE_SPOTS_COUNT = 0 # limit 2,500 requests per day
   GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
-CREATE_RESERVATIONS = false
+CREATE_RESERVATIONS = true
 CREATE_TEST_ACCOUNTS = false
 SEED_CITY_DATABASE = false
 
