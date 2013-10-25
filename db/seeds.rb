@@ -11,9 +11,9 @@ CREATE_FAKE_USERS = true
   FAKE_USERS_COUNT = 10
   FAKE_SPOTS_COUNT = 300 # limit 2,500 requests per day
   GOOGLE_QUERY_SLEEPTIME = 0.25 # (0.25s) necessary to avoid exceeding google's per-second limit
-CREATE_RESERVATIONS = true
+CREATE_RESERVATIONS = false
 CREATE_TEST_ACCOUNTS = false
-SEED_CITY_DATABASE = true
+SEED_CITY_DATABASE = false
 
 
 if CREATE_FAKE_USERS
@@ -27,7 +27,7 @@ if CREATE_FAKE_USERS
       password: "foobar",
       password_confirmation: "foobar"
     )
-    spot.save ? (print ".") : (print "x")
+    user.save ? (print ".") : (print "x")
   end
 
   puts "\n----Creating & Assigning Spots-----"
